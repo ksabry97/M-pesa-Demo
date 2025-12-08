@@ -60,15 +60,16 @@ const HeaderMain = () => {
 
   return (
     <div className="bg-background-primary border-b border-border-primary px-4 md:px-8 py-0">
-      <div className="flex items-center justify-between w-100">
-        <div className="flex items-center justify-between gap-3 h-[80px] w-full">
+      <div className="flex flex-col w-full">
+        {/* Main Header Row */}
+        <div className="flex items-center justify-between gap-2 sm:gap-3 h-[60px] sm:h-[70px] md:h-[80px] w-full">
           {/* Logo Section */}
-          <div className="flex items-center gap-3 w-1/2">
-            <div className="flex items-center gap-3 shrink-0">
+          <div className="flex items-center gap-2 sm:gap-3 flex-1 sm:flex-none sm:w-1/2 min-w-0">
+            <div className="flex items-center gap-2 sm:gap-3 shrink-0">
               <img
                 src={Logo}
                 alt="Logo"
-                className="h-[27px] w-auto object-contain"
+                className="h-[20px] sm:h-[24px] md:h-[27px] w-auto object-contain"
               />
             </div>
             <div className="hidden lg:flex items-center gap-0 flex-1 max-w-[600px]">
@@ -113,21 +114,19 @@ const HeaderMain = () => {
             </div>
           </div>
 
-          {/* Search Container - Hidden on mobile */}
-
           {/* Navigation Controls */}
-          <div className="flex items-center gap-2 md:gap-3 shrink-0">
+          <div className="flex items-center gap-1 sm:gap-2 md:gap-3 shrink-0">
             {/* Country Dropdown - Hidden on small screens */}
             <div className="relative hidden md:block">
               <button
                 onClick={() => setCountryDropdownOpen(!countryDropdownOpen)}
-                className="flex items-center justify-center gap-2 h-[48px] px-4 bg-button-ghost-bg border border-button-ghost-border rounded-[12px] hover:bg-background-panel transition-colors"
+                className="flex items-center justify-center gap-2 h-[40px] md:h-[48px] px-3 md:px-4 bg-button-ghost-bg border border-button-ghost-border rounded-[12px] hover:bg-background-panel transition-colors"
               >
-                <Globe className="w-4 h-4 text-icon-primary" />
-                <span className="text-[14px] leading-[20px] text-button-outline-fg font-poppins font-medium whitespace-nowrap">
+                <Globe className="w-3 h-3 md:w-4 md:h-4 text-icon-primary" />
+                <span className="text-[12px] md:text-[14px] leading-[20px] text-button-outline-fg font-poppins font-medium whitespace-nowrap">
                   {selectedCountry} {getCountryFlag()}
                 </span>
-                <ChevronDown className="w-4 h-4 text-icon-primary" />
+                <ChevronDown className="w-3 h-3 md:w-4 md:h-4 text-icon-primary" />
               </button>
 
               {countryDropdownOpen && (
@@ -152,13 +151,13 @@ const HeaderMain = () => {
             <div className="relative hidden sm:block">
               <button
                 onClick={() => setLangDropdownOpen(!langDropdownOpen)}
-                className="flex items-center justify-center gap-2 h-[48px] px-3 md:px-4 bg-button-ghost-bg border border-button-ghost-border rounded-[12px] hover:bg-background-panel transition-colors"
+                className="flex items-center justify-center gap-1 md:gap-2 h-[40px] md:h-[48px] px-2 md:px-3 lg:px-4 bg-button-ghost-bg border border-button-ghost-border rounded-[12px] hover:bg-background-panel transition-colors"
               >
-                <Globe className="w-4 h-4 text-icon-primary" />
-                <span className="text-[14px] leading-[20px] text-button-outline-fg font-poppins font-medium">
+                <Globe className="w-3 h-3 md:w-4 md:h-4 text-icon-primary" />
+                <span className="text-[12px] md:text-[14px] leading-[20px] text-button-outline-fg font-poppins font-medium">
                   {selectedLang}
                 </span>
-                <ChevronDown className="w-4 h-4 text-icon-primary" />
+                <ChevronDown className="w-3 h-3 md:w-4 md:h-4 text-icon-primary" />
               </button>
 
               {langDropdownOpen && (
@@ -178,28 +177,28 @@ const HeaderMain = () => {
 
             {/* Wishlist Button - Hidden on mobile */}
             <button
-              className="hidden sm:flex items-center justify-center w-[48px] h-[48px] bg-button-outline-bg border border-button-outline-border rounded-[12px] hover:bg-background-panel transition-colors"
+              className="hidden sm:flex items-center justify-center w-[40px] h-[40px] md:w-[48px] md:h-[48px] bg-button-outline-bg border border-button-outline-border rounded-[12px] hover:bg-background-panel transition-colors"
               aria-label="Wishlist"
             >
-              <Heart className="w-5 h-5 text-icon-primary" />
+              <Heart className="w-4 h-4 md:w-5 md:h-5 text-icon-primary" />
             </button>
 
             {/* Join Button */}
-            <button className="flex items-center justify-center h-[48px] px-4 md:px-6 bg-button-fill-bg text-button-fill-fg rounded-[12px] hover:opacity-90 transition-opacity">
-              <span className="text-[14px] leading-[20px] font-poppins font-medium">
+            <button className="flex items-center justify-center h-[36px] sm:h-[40px] md:h-[48px] px-3 sm:px-4 md:px-6 bg-button-fill-bg text-button-fill-fg rounded-[12px] hover:opacity-90 transition-opacity">
+              <span className="text-[12px] sm:text-[13px] md:text-[14px] leading-[20px] font-poppins font-medium">
                 Join
               </span>
             </button>
           </div>
         </div>
 
-        {/* Mobile Search Bar */}
-        <div className="lg:hidden pb-4">
-          <div className="relative">
+        {/* Mobile Search Bar - Full width row below main header */}
+        <div className="lg:hidden w-full pb-3 md:pb-4 -mx-4 md:-mx-8 px-4 md:px-8">
+          <div className="relative w-full">
             <input
               type="text"
               placeholder="Search services..."
-              className="w-full h-[40px] px-4 pr-10 bg-input-bg border border-input-border rounded-[4px] text-[16px] leading-[22px] text-text-highContrast placeholder:text-input-placeholder font-poppins font-regular tracking-[-0.18px] focus:outline-none focus:border-input-borderActive focus:bg-input-active transition-colors"
+              className="w-full h-[40px] px-4 pr-10 bg-input-bg border border-input-border rounded-[4px] text-[14px] sm:text-[16px] leading-[22px] text-text-highContrast placeholder:text-input-placeholder font-poppins font-regular tracking-[-0.18px] focus:outline-none focus:border-input-borderActive focus:bg-input-active transition-colors"
             />
             <Search className="absolute right-3 top-1/2 -translate-y-1/2 w-4 h-4 text-icon-primary pointer-events-none" />
           </div>

@@ -23,18 +23,18 @@ const HeaderSubNav = () => {
   return (
     <div className="bg-background-panel border-b border-border-primary px-4 md:px-8 py-2">
       <div className="mx-auto">
-        <div className="flex items-center gap-2 md:gap-3 overflow-x-auto scrollbar-hide">
+        <div className="flex items-center gap-2 md:gap-3 overflow-x-auto scrollbar-hide pb-1">
           {/* All Categories Button */}
           <div className="relative shrink-0">
             <button
               onClick={() => setCategoriesOpen(!categoriesOpen)}
-              className="flex items-center gap-2 h-[48px] px-4 bg-button-fill-bg text-button-fill-fg rounded-[12px] hover:opacity-90 transition-opacity"
+              className="flex items-center gap-1.5 sm:gap-2 h-[40px] sm:h-[44px] md:h-[48px] px-3 sm:px-4 bg-button-fill-bg text-button-fill-fg rounded-[12px] hover:opacity-90 transition-opacity"
             >
-              <LayoutList className="w-4 h-4" />
-              <span className="text-[14px] leading-[20px] font-poppins font-medium whitespace-nowrap">
+              <LayoutList className="w-3.5 h-3.5 sm:w-4 sm:h-4" />
+              <span className="text-[12px] sm:text-[13px] md:text-[14px] leading-[20px] font-poppins font-medium whitespace-nowrap">
                 All categories
               </span>
-              <ChevronDown className="w-4 h-4" />
+              <ChevronDown className="w-3.5 h-3.5 sm:w-4 sm:h-4" />
             </button>
 
             {categoriesOpen && (
@@ -60,20 +60,20 @@ const HeaderSubNav = () => {
           </div>
 
           {/* Deals Button */}
-          <button className="flex items-center gap-2 h-[48px] px-3 md:px-4 bg-transparent border border-button-ghost-border rounded-[12px] hover:bg-background-primary transition-colors shrink-0">
-            <Flame className="w-4 h-4 text-icon-primary" />
-            <span className="text-[14px] leading-[20px] text-button-outline-fg font-poppins font-medium whitespace-nowrap">
+          <button className="flex items-center gap-1.5 sm:gap-2 h-[40px] sm:h-[44px] md:h-[48px] px-2 sm:px-3 md:px-4 bg-transparent border border-button-ghost-border rounded-[12px] hover:bg-background-primary transition-colors shrink-0">
+            <Flame className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-icon-primary" />
+            <span className="text-[12px] sm:text-[13px] md:text-[14px] leading-[20px] text-button-outline-fg font-poppins font-medium whitespace-nowrap">
               Deals
             </span>
           </button>
 
           {/* Flash Sale Button with Hot Tag */}
-          <button className="flex items-center gap-2 h-[48px] px-3 md:px-4 bg-transparent border border-button-ghost-border rounded-[12px] hover:bg-background-primary transition-colors shrink-0">
-            <Zap className="w-4 h-4 text-icon-primary" />
-            <span className="text-[14px] leading-[20px] text-button-outline-fg font-poppins font-medium whitespace-nowrap">
+          <button className="flex items-center gap-1.5 sm:gap-2 h-[40px] sm:h-[44px] md:h-[48px] px-2 sm:px-3 md:px-4 bg-transparent border border-button-ghost-border rounded-[12px] hover:bg-background-primary transition-colors shrink-0">
+            <Zap className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-icon-primary" />
+            <span className="text-[12px] sm:text-[13px] md:text-[14px] leading-[20px] text-button-outline-fg font-poppins font-medium whitespace-nowrap">
               Flash Sale
             </span>
-            <span className="flex items-center gap-1 px-2 py-1 bg-tag-hotOffers text-white text-[12px] leading-[16px] tracking-[-0.12px] font-poppins font-medium rounded-[4px]">
+            <span className="flex items-center gap-1 px-1.5 sm:px-2 py-0.5 sm:py-1 bg-tag-hotOffers text-white text-[10px] sm:text-[11px] md:text-[12px] leading-[16px] tracking-[-0.12px] font-poppins font-medium rounded-[4px]">
               Hot
             </span>
           </button>
