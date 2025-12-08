@@ -60,58 +60,60 @@ const HeaderMain = () => {
 
   return (
     <div className="bg-background-primary border-b border-border-primary px-4 md:px-8 py-0">
-      <div className="max-w-[1440px] mx-auto">
-        <div className="flex items-center justify-between gap-3 h-[80px]">
+      <div className="flex items-center justify-between w-100">
+        <div className="flex items-center justify-between gap-3 h-[80px] w-full">
           {/* Logo Section */}
-          <div className="flex items-center gap-3 shrink-0">
-            <img
-              src={Logo}
-              alt="Logo"
-              className="h-[27px] w-auto object-contain"
-            />
+          <div className="flex items-center gap-3 w-1/2">
+            <div className="flex items-center gap-3 shrink-0">
+              <img
+                src={Logo}
+                alt="Logo"
+                className="h-[27px] w-auto object-contain"
+              />
+            </div>
+            <div className="hidden lg:flex items-center gap-0 flex-1 max-w-[600px]">
+              {/* Category Dropdown */}
+              <div className="relative">
+                <button
+                  onClick={() => setCategoryDropdownOpen(!categoryDropdownOpen)}
+                  className="flex items-center justify-between gap-2 h-[40px] px-4 bg-input-active  border-r-2 rounded-l-[4px] text-text-highContrast text-[16px] leading-[22px] whitespace-nowrap min-w-[165px]"
+                >
+                  <span className="font-poppins font-regular tracking-[-0.18px]">
+                    All Categories
+                  </span>
+                  <ChevronDown className="w-4 h-4 text-icon-primary shrink-0" />
+                </button>
+
+                {categoryDropdownOpen && (
+                  <div className="absolute top-full mt-1 left-0 bg-background-surface border border-border-primary rounded-[4px] shadow-[0px_4px_12px_rgba(0,0,0,0.08)] py-1 min-w-[200px] z-50">
+                    {categories.map((category) => (
+                      <button
+                        key={category}
+                        onClick={() => {
+                          setCategoryDropdownOpen(false);
+                        }}
+                        className="w-full text-left px-4 py-2 text-[14px] text-text-primary hover:bg-background-panel transition-colors font-poppins"
+                      >
+                        {category}
+                      </button>
+                    ))}
+                  </div>
+                )}
+              </div>
+
+              {/* Search Input */}
+              <div className="flex-1 relative">
+                <input
+                  type="text"
+                  placeholder="What service are you looking for today?"
+                  className="w-full h-[40px] px-4 pr-10 bg-input-bg text-[16px] leading-[22px] text-text-highContrast placeholder:text-input-placeholder font-poppins font-regular tracking-[-0.18px] focus:outline-none focus:border-input-borderActive focus:bg-input-active transition-colors"
+                />
+                <Search className="absolute right-3 top-1/2 -translate-y-1/2 w-4 h-4 text-icon-primary pointer-events-none" />
+              </div>
+            </div>
           </div>
 
           {/* Search Container - Hidden on mobile */}
-          <div className="hidden lg:flex items-center gap-0 flex-1 max-w-[600px]">
-            {/* Category Dropdown */}
-            <div className="relative">
-              <button
-                onClick={() => setCategoryDropdownOpen(!categoryDropdownOpen)}
-                className="flex items-center justify-between gap-2 h-[40px] px-4 bg-input-active border border-input-borderActive border-r-0 rounded-l-[4px] text-text-highContrast text-[16px] leading-[22px] whitespace-nowrap min-w-[165px]"
-              >
-                <span className="font-poppins font-regular tracking-[-0.18px]">
-                  All Categories
-                </span>
-                <ChevronDown className="w-4 h-4 text-icon-primary shrink-0" />
-              </button>
-
-              {categoryDropdownOpen && (
-                <div className="absolute top-full mt-1 left-0 bg-background-surface border border-border-primary rounded-[4px] shadow-[0px_4px_12px_rgba(0,0,0,0.08)] py-1 min-w-[200px] z-50">
-                  {categories.map((category) => (
-                    <button
-                      key={category}
-                      onClick={() => {
-                        setCategoryDropdownOpen(false);
-                      }}
-                      className="w-full text-left px-4 py-2 text-[14px] text-text-primary hover:bg-background-panel transition-colors font-poppins"
-                    >
-                      {category}
-                    </button>
-                  ))}
-                </div>
-              )}
-            </div>
-
-            {/* Search Input */}
-            <div className="flex-1 relative">
-              <input
-                type="text"
-                placeholder="What service are you looking for today?"
-                className="w-full h-[40px] px-4 pr-10 bg-input-bg border border-input-border rounded-r-[4px] text-[16px] leading-[22px] text-text-highContrast placeholder:text-input-placeholder font-poppins font-regular tracking-[-0.18px] focus:outline-none focus:border-input-borderActive focus:bg-input-active transition-colors"
-              />
-              <Search className="absolute right-3 top-1/2 -translate-y-1/2 w-4 h-4 text-icon-primary pointer-events-none" />
-            </div>
-          </div>
 
           {/* Navigation Controls */}
           <div className="flex items-center gap-2 md:gap-3 shrink-0">
