@@ -22,7 +22,7 @@ const HeaderSubNav = () => {
 
   return (
     <div className="bg-background-panel border-b border-border-primary px-4 md:px-8 py-2">
-      <div className="max-w-[1440px] mx-auto">
+      <div className="mx-auto">
         <div className="flex items-center gap-2 md:gap-3 overflow-x-auto scrollbar-hide">
           {/* All Categories Button */}
           <div className="relative shrink-0">
