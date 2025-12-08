@@ -1,133 +1,101 @@
-import { Heart, ShoppingCart, Star } from "lucide-react";
+/**
+ * ProductCard Demo/Example Component
+ * 
+ * This file demonstrates how to use the new ProductCard component.
+ * The actual ProductCard component is located in src/components/ProductCard/
+ */
+
 import { useState } from "react";
+import { ProductCard } from "./ProductCard/ProductCard";
 
 const mockProducts = [
   {
     id: "1",
-    image: "https://example.com/product1.jpg",
-    category: "Electronics",
-    title: "Smartphone",
-    description: "Latest model with advanced features",
-    price: 699,
-    currency: "$",
-    seller: "TechStore",
+    image: "https://images.unsplash.com/photo-1546069901-ba9599a7e63c?w=400",
+    category: "Food & Beverages",
+    location: "Nairobi, Kenya",
+    duration: 240,
+    title: "Nyama Choma Catering (20 pax)",
+    description: "Traditional Kenyan BBQ catering service for events",
+    price: 15000.30,
+    currency: "AED",
     rating: 4.5,
-    reviewCount: 120,
-    isNewArrival: true,
+    reviewCount: 738,
+    isVerified: true,
+    merchantLogo: "https://images.unsplash.com/photo-1560179707-f14e90ef3623?w=100",
   },
   {
     id: "2",
-    image: "https://example.com/product2.jpg",
-    category: "Home Appliances",
-    title: "Air Conditioner",
-    description: "Energy efficient with fast cooling",
-    price: 499,
-    currency: "$",
-    seller: "HomeComfort",
-    rating: 4.0,
-    reviewCount: 85,
-    isNewArrival: false,
+    image: "https://images.unsplash.com/photo-1556910096-6f5e72db6803?w=400",
+    category: "Cleaning Services",
+    location: "Mombasa, Kenya",
+    duration: 120,
+    title: "Professional Office Cleaning",
+    description: "Thorough office cleaning by trusted professionals",
+    price: 5000.00,
+    currency: "AED",
+    rating: 4.8,
+    reviewCount: 245,
+    isVerified: false,
+  },
+  {
+    id: "3",
+    image: "https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?w=400",
+    category: "Design & UI/UX",
+    location: "Kampala, Uganda",
+    duration: 480,
+    title: "Website Redesign Service",
+    description: "Complete website redesign with modern UI/UX",
+    price: 25000.50,
+    currency: "AED",
+    rating: 4.2,
+    reviewCount: 156,
+    isVerified: true,
   },
 ];
 
-const ProductCard = () => {
-  const [favorites, setFavorites] = useState({});
+const ProductCardDemo = () => {
+  const [favorites, setFavorites] = useState<Record<string, boolean>>({});
 
-  const toggleWishlist = (id: any) => {
+  const handleFavoriteToggle = (productId: string, isFavorite: boolean) => {
     setFavorites((prev) => ({
       ...prev,
-      [id]: !prev[id] ,
+      [productId]: isFavorite,
     }));
   };
 
   return (
-    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 mx-auto gap-6 p-4">
+    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 p-4">
       {mockProducts.map((product) => (
-        <div
+        <ProductCard
           key={product.id}
-          className="w-full max-w-sm bg-white rounded-2xl shadow-md overflow-hidden hover:shadow-xl transition-shadow"
-        >
-          {/* Image Section */}
-          <div className="relative bg-gray-200 h-64">
-            <img
-              src={product.image}
-              alt={product.title}
-              className="w-full h-full object-cover"
-            />
-
-            {/* New Arrival Badge */}
-            {product.isNewArrival && (
-              <div className="absolute top-4 left-4">
-                <span className="bg-green-100 text-green-700 text-xs font-medium px-3 py-1 rounded-full">
-                  New arrival
-                </span>
-              </div>
-            )}
-
-            {/* Favorite Button */}
-            <button
-              onClick={() => toggleWishlist(product.id)}
-              className="absolute top-4 right-4 w-10 h-10 bg-white rounded-full flex items-center justify-center hover:bg-gray-50 transition-colors"
-            >
-              <Heart
-                className={`w-5 h-5 ${
-                  favorites[product.id]
-                    ? "fill-red-500 text-red-500"
-                    : "text-gray-600"
-                }`}
-              />
-            </button>
-
-            {/* Add to Cart Button */}
-            <button className="absolute bottom-4 left-4 right-4 bg-green-500 hover:bg-green-600 text-white font-medium py-3 rounded-xl flex items-center justify-center gap-2 transition-colors">
-              <ShoppingCart className="w-5 h-5" />
-              Add to Cart
-            </button>
-          </div>
-
-          {/* Content Section */}
-          <div className="p-4">
-            <p className="text-sm text-gray-500 mb-1">{product.category}</p>
-
-            <h3 className="text-lg font-bold text-gray-900 mb-2">
-              {product.title}
-            </h3>
-
-            <p className="text-sm text-gray-600 mb-3 line-clamp-2">
-              {product.description}
-            </p>
-
-            {/* Rating */}
-            <div className="flex items-center gap-1 mb-4">
-              {[...Array(5)].map((_, index) => (
-                <Star
-                  key={index}
-                  className={`w-4 h-4 ${
-                    index < Math.round(product.rating)
-                      ? "fill-yellow-400 text-yellow-400"
-                      : "text-gray-300"
-                  }`}
-                />
-              ))}
-              <span className="text-sm text-gray-600 ml-1">
-                ({product.reviewCount})
-              </span>
-            </div>
-
-            {/* Price + Buy */}
-            <div className="flex items-center justify-between">
-              <div>
-                <p className="text-2xl font-bold text-gray-900">
-                  {product.currency} {product.price}
-                </p>
-                <p className="text-sm text-gray-500">{product.seller}</p>
-              </div>
-            </div>
-          </div>
-        </div>
+          image={product.image}
+          imageAlt={product.title}
+          category={product.category}
+          location={product.location}
+          duration={product.duration}
+          isFavorite={favorites[product.id] || false}
+          onFavoriteToggle={(isFavorite) =>
+            handleFavoriteToggle(product.id, isFavorite)
+          }
+          merchantLogo={product.merchantLogo}
+          rating={product.rating}
+          reviewCount={product.reviewCount}
+          title={product.title}
+          description={product.description}
+          isVerified={product.isVerified}
+          price={product.price}
+          currency={product.currency}
+          onBookNow={() => {
+            console.log(`Book now: ${product.title}`);
+          }}
+          onClick={() => {
+            console.log(`Card clicked: ${product.title}`);
+          }}
+        />
       ))}
     </div>
   );
 };
 
-export default ProductCard;
+export default ProductCardDemo;
