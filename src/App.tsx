@@ -9,6 +9,8 @@ import  SignInPage  from '../src/components/auth/pages/SignInPage';
 import { SignUpPage } from '../src/components/auth/pages/SignUpPage';
 import OTPPage from './components/auth/pages/OTPPage';
 import ResetPasswordPage from './components/auth/pages/ResetPasswordPage';
+import SingleService from './components/merchantServices/singleService';
+import MultiService from './components/merchantServices/MultiService';
 
 function App() {
   return (
@@ -26,6 +28,8 @@ function App() {
             <Route path="otp" element={ <OTPPage />} />
             <Route path="reset-password" element={<ResetPasswordPage />} />
           </Route>
+          <Route path="merchant-services" element={<MultiService />} />
+
         </Route>
       </Routes>
     </BrowserRouter>
