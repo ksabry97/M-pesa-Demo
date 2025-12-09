@@ -1,5 +1,5 @@
 import { Search, ChevronDown, Globe, Heart } from "lucide-react";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { useTranslation } from "react-i18next";
 import Logo from "../../assets/Logo.png";
 
@@ -8,6 +8,11 @@ const HeaderMain = () => {
   const [countryDropdownOpen, setCountryDropdownOpen] = useState(false);
   const [langDropdownOpen, setLangDropdownOpen] = useState(false);
   const [categoryDropdownOpen, setCategoryDropdownOpen] = useState(false);
+  
+  // Refs for click-outside detection
+  const countryDropdownRef = useRef<HTMLDivElement>(null);
+  const langDropdownRef = useRef<HTMLDivElement>(null);
+  const categoryDropdownRef = useRef<HTMLDivElement>(null);
   const [selectedCountry, setSelectedCountry] = useState(() => {
     return localStorage.getItem("selectedCountry") || "Kenya";
   });
@@ -48,6 +53,66 @@ const HeaderMain = () => {
     localStorage.setItem("selectedCountry", selectedCountry);
   }, [selectedCountry]);
 
+  // Click outside detection for country dropdown
+  useEffect(() => {
+    const handleClickOutside = (event: MouseEvent) => {
+      if (
+        countryDropdownRef.current &&
+        !countryDropdownRef.current.contains(event.target as Node)
+      ) {
+        setCountryDropdownOpen(false);
+      }
+    };
+
+    if (countryDropdownOpen) {
+      document.addEventListener("mousedown", handleClickOutside);
+    }
+
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, [countryDropdownOpen]);
+
+  // Click outside detection for language dropdown
+  useEffect(() => {
+    const handleClickOutside = (event: MouseEvent) => {
+      if (
+        langDropdownRef.current &&
+        !langDropdownRef.current.contains(event.target as Node)
+      ) {
+        setLangDropdownOpen(false);
+      }
+    };
+
+    if (langDropdownOpen) {
+      document.addEventListener("mousedown", handleClickOutside);
+    }
+
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, [langDropdownOpen]);
+
+  // Click outside detection for category dropdown
+  useEffect(() => {
+    const handleClickOutside = (event: MouseEvent) => {
+      if (
+        categoryDropdownRef.current &&
+        !categoryDropdownRef.current.contains(event.target as Node)
+      ) {
+        setCategoryDropdownOpen(false);
+      }
+    };
+
+    if (categoryDropdownOpen) {
+      document.addEventListener("mousedown", handleClickOutside);
+    }
+
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, [categoryDropdownOpen]);
+
   const handleLanguageChange = (lang: (typeof languages)[0]) => {
     setSelectedLang(lang.name);
     i18n.changeLanguage(lang.code);
@@ -59,10 +124,10 @@ const HeaderMain = () => {
   };
 
   return (
-    <div className="bg-background-primary border-b border-border-primary px-4 md:px-8 py-0">
-      <div className="flex flex-col w-full">
+    <div className="bg-background-primary border-b border-border-primary px-4 md:px-8 py-0 overflow-visible">
+      <div className="flex flex-col w-full overflow-visible">
         {/* Main Header Row */}
-        <div className="flex items-center justify-between gap-2 sm:gap-3 h-[60px] sm:h-[70px] md:h-[80px] w-full">
+        <div className="flex items-center justify-between gap-2 sm:gap-3 h-[60px] sm:h-[70px] md:h-[80px] w-full overflow-visible">
           {/* Logo Section */}
           <div className="flex items-center gap-2 sm:gap-3 flex-1 sm:flex-none sm:w-1/2 min-w-0">
             <div className="flex items-center gap-2 sm:gap-3 shrink-0">
@@ -74,7 +139,7 @@ const HeaderMain = () => {
             </div>
             <div className="hidden lg:flex items-center gap-0 flex-1 max-w-[600px]">
               {/* Category Dropdown */}
-              <div className="relative">
+              <div className="relative" ref={categoryDropdownRef}>
                 <button
                   onClick={() => setCategoryDropdownOpen(!categoryDropdownOpen)}
                   className="flex items-center justify-between gap-2 h-[40px] px-4 bg-input-active  border-r-2 rounded-l-[4px] text-text-highContrast text-[16px] leading-[22px] whitespace-nowrap min-w-[165px]"
@@ -86,7 +151,7 @@ const HeaderMain = () => {
                 </button>
 
                 {categoryDropdownOpen && (
-                  <div className="absolute top-full mt-1 left-0 bg-background-surface border border-border-primary rounded-[4px] shadow-[0px_4px_12px_rgba(0,0,0,0.08)] py-1 min-w-[200px] z-50">
+                  <div className="absolute top-full mt-1 left-0 bg-background-surface border border-border-primary rounded-[4px] shadow-[0px_4px_12px_rgba(0,0,0,0.08)] py-1 min-w-[200px] z-[100]">
                     {categories.map((category) => (
                       <button
                         key={category}
@@ -115,9 +180,9 @@ const HeaderMain = () => {
           </div>
 
           {/* Navigation Controls */}
-          <div className="flex items-center gap-1 sm:gap-2 md:gap-3 shrink-0">
-            {/* Country Dropdown - Hidden on small screens */}
-            <div className="relative hidden md:block">
+          <div className="flex items-center gap-1 sm:gap-2 md:gap-3 shrink-0 overflow-visible">
+            {/* Country Dropdown */}
+            <div className="relative" ref={countryDropdownRef}>
               <button
                 onClick={() => setCountryDropdownOpen(!countryDropdownOpen)}
                 className="flex items-center justify-center gap-2 h-[40px] md:h-[48px] px-3 md:px-4 bg-button-ghost-bg  rounded-[12px] hover:bg-background-panel transition-colors"
@@ -140,7 +205,7 @@ const HeaderMain = () => {
               </button>
 
               {countryDropdownOpen && (
-                <div className="absolute top-full mt-1 right-0 bg-background-surface border border-border-primary rounded-[12px] shadow-[0px_4px_12px_rgba(0,0,0,0.08)] py-1 min-w-[140px] z-50">
+                <div className="absolute top-full mt-1 left-0 md:left-auto md:right-0 bg-background-surface border border-border-primary rounded-[12px] shadow-[0px_4px_12px_rgba(0,0,0,0.08)] py-1 min-w-[140px] z-[100]">
                   {countries.map((country) => (
                     <button
                       key={country.name}
@@ -168,7 +233,7 @@ const HeaderMain = () => {
             </div>
 
             {/* Language Dropdown */}
-            <div className="relative hidden sm:block">
+            <div className="relative" ref={langDropdownRef}>
               <button
                 onClick={() => setLangDropdownOpen(!langDropdownOpen)}
                 className="flex items-center justify-center gap-1 md:gap-2 h-[40px] md:h-[48px] px-2 md:px-3 lg:px-4 bg-button-ghost-bg  rounded-[12px] hover:bg-background-panel transition-colors"
@@ -181,7 +246,7 @@ const HeaderMain = () => {
               </button>
 
               {langDropdownOpen && (
-                <div className="absolute top-full mt-1 right-0 bg-background-surface border border-border-primary rounded-[12px] shadow-[0px_4px_12px_rgba(0,0,0,0.08)] py-1 min-w-[140px] z-50">
+                <div className="absolute top-full mt-1 left-0 md:left-auto md:right-0 bg-background-surface border border-border-primary rounded-[12px] shadow-[0px_4px_12px_rgba(0,0,0,0.08)] py-1 min-w-[140px] z-[100]">
                   {languages.map((lang) => (
                     <button
                       key={lang.code}

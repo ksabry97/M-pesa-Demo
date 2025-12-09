@@ -96,7 +96,7 @@ export const ServicesCarousel = ({
   return (
     <div className={`relative w-full bg-transparent ${className}`}>
       {/* Carousel Container */}
-      <div className="relative h-[600px] w-full overflow-hidden rounded-[12px]">
+      <div className="relative h-[300px] sm:h-[400px] md:h-[500px] lg:h-[600px] w-full overflow-hidden rounded-[12px]">
         {/* Slides Container with Transition */}
         <div className="relative h-full w-full">
           {services.map((service, index) => (
@@ -119,15 +119,15 @@ export const ServicesCarousel = ({
 
               {/* Content Overlay */}
               {index === currentIndex && (
-                <div className="relative z-10 flex h-full items-center px-[164px] py-8">
-                  <div className="flex flex-col gap-[11px]">
+                <div className="relative z-10 flex h-full items-start sm:items-center px-4 sm:px-6 md:px-12 lg:px-[164px] pt-12 sm:pt-4 sm:py-6 md:py-8">
+                  <div className="flex flex-col gap-2 sm:gap-[11px] max-w-full sm:max-w-[90%] md:max-w-[80%] lg:max-w-none">
                     {/* Title - matches Figma H3 styling */}
-                    <h2 className="text-[40px] font-bold leading-[48px] tracking-[-0.3px] text-white">
+                    <h2 className="text-2xl sm:text-3xl md:text-[36px] lg:text-[40px] font-bold leading-tight sm:leading-[40px] md:leading-[44px] lg:leading-[48px] tracking-[-0.3px] text-white">
                       {service.title}
                     </h2>
 
                     {/* Description - matches Figma Body-2 styling */}
-                    <p className="text-base font-normal leading-6 text-white">
+                    <p className="text-sm sm:text-base font-normal leading-5 sm:leading-6 text-white">
                       {service.description}
                     </p>
 
@@ -137,12 +137,12 @@ export const ServicesCarousel = ({
                         onServiceClick?.(index);
                         service.onClick?.();
                       }}
-                      className="mt-2 flex h-12 w-fit items-center justify-center gap-2 rounded-[12px] bg-[#272962] px-4 py-2 transition-all hover:bg-[#1f1f4d]"
+                      className="mt-10 sm:mt-2 flex h-10 sm:h-12 w-fit items-center justify-center gap-2 rounded-[12px] bg-[#272962] px-3 sm:px-4 py-2 transition-all hover:bg-[#1f1f4d]"
                     >
-                      <span className="text-sm font-medium leading-5 text-white">
+                      <span className="text-xs sm:text-sm font-medium leading-5 text-white">
                         Book now
                       </span>
-                      <ChevronsRight className="h-4 w-4 text-white" />
+                      <ChevronsRight className="h-3 w-3 sm:h-4 sm:w-4 text-white" />
                     </button>
                   </div>
                 </div>
@@ -159,12 +159,19 @@ export const ServicesCarousel = ({
               onClick={handlePrevious}
               className="
                 absolute
-                left-16
+                left-2
+                sm:left-4
+                md:left-8
+                lg:left-16
                 top-1/2
                 z-20
                 flex
-                h-12
-                w-12
+                h-8
+                w-8
+                sm:h-10
+                sm:w-10
+                md:h-12
+                md:w-12
                 -translate-y-1/2
                 items-center
                 justify-center
@@ -178,7 +185,7 @@ export const ServicesCarousel = ({
               "
               aria-label="Previous service"
             >
-              <ChevronLeft className="h-5 w-5 text-text-highContrast" />
+              <ChevronLeft className="h-4 w-4 sm:h-5 sm:w-5 text-text-highContrast" />
             </button>
 
             {/* Right Arrow */}
@@ -186,12 +193,19 @@ export const ServicesCarousel = ({
               onClick={handleNext}
               className="
                 absolute
-                right-16
+                right-2
+                sm:right-4
+                md:right-8
+                lg:right-16
                 top-1/2
                 z-20
                 flex
-                h-12
-                w-12
+                h-8
+                w-8
+                sm:h-10
+                sm:w-10
+                md:h-12
+                md:w-12
                 -translate-y-1/2
                 items-center
                 justify-center
@@ -205,22 +219,22 @@ export const ServicesCarousel = ({
               "
               aria-label="Next service"
             >
-              <ChevronRight className="h-5 w-5 text-text-highContrast" />
+              <ChevronRight className="h-4 w-4 sm:h-5 sm:w-5 text-text-highContrast" />
             </button>
           </>
         )}
 
         {/* Slide Indicators (optional) */}
         {services.length > 1 && (
-          <div className="absolute bottom-8 left-1/2 z-20 flex -translate-x-1/2 gap-2">
+          <div className="absolute bottom-4 sm:bottom-6 md:bottom-8 left-1/2 z-20 flex -translate-x-1/2 gap-1.5 sm:gap-2">
             {services.map((_, index) => (
               <button
                 key={index}
                 onClick={() => setCurrentIndex(index)}
-                className={`h-2 rounded-full transition-all ${
+                className={`h-1.5 sm:h-2 rounded-full transition-all ${
                   index === currentIndex
-                    ? "w-8 bg-white"
-                    : "w-2 bg-white/50 hover:bg-white/75"
+                    ? "w-6 sm:w-8 bg-white"
+                    : "w-1.5 sm:w-2 bg-white/50 hover:bg-white/75"
                 }`}
                 aria-label={`Go to slide ${index + 1}`}
               />
