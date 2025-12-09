@@ -92,6 +92,7 @@ const ProductCardDemo = () => {
           onClick={() => {
             console.log(`Card clicked: ${product.title}`);
           }}
+          hideLocation={false}
         />
       ))}
     </div>

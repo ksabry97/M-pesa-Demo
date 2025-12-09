@@ -5,10 +5,10 @@ import { FavoriteButton } from "./FavoriteButton";
 
 export interface ProductCardProps {
   /**
-   * Product image URL
+   * Product image URL (optional - will show placeholder if not provided)
    */
-  image: string;
-  
+  image?: string;
+
   /**
    * Alt text for the image
    */
@@ -19,77 +19,82 @@ export interface ProductCardProps {
    * Category tag text (e.g., "Food & Beverages")
    */
   category?: string;
-  
+
   /**
    * Location tag text (e.g., "Nairobi, Kenya")
    */
   location?: string;
-  
+
   /**
    * Duration in minutes (e.g., "240")
    */
   duration?: number;
-  
+
   /**
    * Whether the product is favorited
    */
   isFavorite?: boolean;
-  
+
   /**
    * Callback when favorite state changes
    */
   onFavoriteToggle?: (isFavorite: boolean) => void;
-  
+
   /**
    * Merchant/Provider logo URL
    */
   merchantLogo?: string;
-  
+
   /**
    * Product rating (0-5)
    */
   rating: number;
-  
+
   /**
    * Number of reviews
    */
   reviewCount: number;
-  
+
   /**
    * Product title/name
    */
   title: string;
-  
+
   /**
    * Product description
    */
   description: string;
-  
+
   /**
    * Whether the product/service is verified
    */
   isVerified?: boolean;
-  
+
   /**
-   * Product price (number)
+   * Product price (optional - hide for package-based services)
    */
-  price: number;
-  
+  price?: number;
+
   /**
    * Currency symbol (default: "AED")
    */
   currency?: string;
-  
+
   /**
    * Callback when "Book now" button is clicked
    */
   onBookNow?: () => void;
-  
+
+  /**
+   * Custom button text (defaults to "Book now")
+   */
+  buttonText?: string;
+
   /**
    * Callback when card is clicked
    */
   onClick?: () => void;
-  
+
   /**
    * Optional className
    */
@@ -98,10 +103,10 @@ export interface ProductCardProps {
 
 /**
  * ProductCard Component
- * 
+ *
  * A comprehensive product/service card component matching the Figma design.
  * Displays product image, tags, rating, details, price, and action button.
- * 
+ *
  * @example
  * ```tsx
  * <ProductCard
@@ -136,6 +141,7 @@ export const ProductCard = ({
   price,
   currency = "AED",
   onBookNow,
+  buttonText = "Book now",
   onClick,
   hideLocation,
   className = "",
@@ -149,7 +155,8 @@ export const ProductCard = ({
     };
   };
 
-  const priceParts = formatPrice(price);
+  const priceParts =
+    price !== undefined ? formatPrice(price) : { integer: "", decimal: "" };
   const isClickable = !!onClick;
 
   return (
@@ -181,13 +188,17 @@ export const ProductCard = ({
       <div className="relative w-full h-[220px] overflow-hidden">
         {/* Main Product Image */}
         <img
-          src={image}
+          src={
+            image ||
+            "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='260' height='220'%3E%3Crect fill='%23f0f0f0' width='260' height='220'/%3E%3Ctext x='50%25' y='50%25' text-anchor='middle' dy='.3em' fill='%23999' font-family='sans-serif' font-size='14'%3ENo Image%3C/text%3E%3C/svg%3E"
+          }
           alt={imageAlt || title}
           className="w-full h-full object-cover"
           onError={(e) => {
             // Fallback to placeholder if image fails to load
             const target = e.target as HTMLImageElement;
-            target.src = "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='260' height='220'%3E%3Crect fill='%23f0f0f0' width='260' height='220'/%3E%3Ctext x='50%25' y='50%25' text-anchor='middle' dy='.3em' fill='%23999' font-family='sans-serif' font-size='14'%3EImage%3C/text%3E%3C/svg%3E";
+            target.src =
+              "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='260' height='220'%3E%3Crect fill='%23f0f0f0' width='260' height='220'/%3E%3Ctext x='50%25' y='50%25' text-anchor='middle' dy='.3em' fill='%23999' font-family='sans-serif' font-size='14'%3EImage%3C/text%3E%3C/svg%3E";
           }}
         />
 
@@ -232,55 +243,56 @@ export const ProductCard = ({
           </div>
         )}
       </div>
+      <div className="flex flex-1 flex-col justify-between gap-2 py-1">
+        {/* Content Section */}
+        <div className="flex flex-col gap-1 px-2 py-1">
+          {/* Rating and Title Section */}
+          <div className="flex flex-col gap-2 py-1">
+            {/* Rating */}
+            <div className="flex items-center">
+              <StarRating rating={rating} reviewCount={reviewCount} />
+            </div>
 
-      {/* Content Section */}
-      <div className="flex flex-col gap-1 px-2 py-1">
-        {/* Rating and Title Section */}
-        <div className="flex flex-col gap-2 py-1">
-          {/* Rating */}
-          <div className="flex items-center">
-            <StarRating rating={rating} reviewCount={reviewCount} />
+            {/* Title with Verification Badge */}
+            <div className="flex items-center gap-2">
+              {isVerified && (
+                <div className="flex items-center justify-center shrink-0">
+                  <CheckCircle2 size={18} className="text-accent-darker" />
+                </div>
+              )}
+              <h3 className="flex-1 text-label-2 font-semibold text-text-highContrast truncate">
+                {title}
+              </h3>
+            </div>
           </div>
 
-          {/* Title with Verification Badge */}
-          <div className="flex items-center gap-2">
-            {isVerified && (
-              <div className="flex items-center justify-center shrink-0">
-                <CheckCircle2 size={18} className="text-accent-darker" />
+          {/* Description */}
+          <p className="text-label-2 font-regular text-text-primary line-clamp-2 py-1">
+            {description}
+          </p>
+        </div>
+        <div className="flex flex-col gap-2 px-2 py-1">
+          {/* Price - Only show if price is provided */}
+          {price !== undefined && (
+            <div className="flex items-center gap-1 py-1">
+              <span className="text-currency-lg font-regular text-text-highContrast">
+                {currency}
+              </span>
+              <div className="flex items-center text-h6 font-medium text-text-highContrast">
+                <span>{priceParts.integer}</span>
+                <span>.{priceParts.decimal}</span>
               </div>
-            )}
-            <h3 className="flex-1 text-label-2 font-semibold text-text-highContrast truncate">
-              {title}
-            </h3>
-          </div>
-        </div>
-
-        {/* Description */}
-        <p className="text-label-2 font-regular text-text-primary line-clamp-2 py-1">
-          {description}
-        </p>
-
-        {/* Price */}
-        <div className="flex items-center gap-1 py-1">
-          <span className="text-currency-lg font-regular text-text-highContrast">
-            {currency}
-          </span>
-          <div className="flex items-center text-h6 font-medium text-text-highContrast">
-            <span>{priceParts.integer}</span>
-            <span>.{priceParts.decimal}</span>
-          </div>
-        </div>
-      </div>
-
-      {/* Action Button */}
-      {onBookNow && (
-        <div className="px-2 pb-2">
-          <button
-            onClick={(e) => {
-              e.stopPropagation(); // Prevent card click
-              onBookNow();
-            }}
-            className="
+            </div>
+          )}
+          {/* Action Button */}
+          {onBookNow && (
+            <div className="pb-2">
+              <button
+                onClick={(e) => {
+                  e.stopPropagation(); // Prevent card click
+                  onBookNow();
+                }}
+                className="
               w-full
               h-10
               bg-button-fill-bg
@@ -294,14 +306,15 @@ export const ProductCard = ({
               transition-colors
               hover:opacity-90
             "
-          >
-            Book now
-          </button>
+              >
+                {buttonText}
+              </button>
+            </div>
+          )}
         </div>
-      )}
+      </div>
     </div>
   );
 };
 
 export default ProductCard;
-
