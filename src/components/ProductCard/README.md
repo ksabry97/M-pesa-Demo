@@ -193,3 +193,4 @@ Heart icon button for favoriting products.
 
 See `src/components/ProductCard.tsx` for a complete demo with multiple product cards.
 
+

@@ -21,9 +21,9 @@ const HeaderMain = () => {
   });
 
   const countries = [
-    { name: "Kenya", flag: "🇰🇪" },
-    { name: "Lesotho", flag: "🇱🇸" },
-    { name: "Tanzania", flag: "🇹🇿" },
+    { name: "Kenya", flag: "ke" },
+    { name: "Lesotho", flag: "ls" },
+    { name: "Tanzania", flag: "tz" },
   ];
 
   const languages = [
@@ -120,11 +120,21 @@ const HeaderMain = () => {
             <div className="relative hidden md:block">
               <button
                 onClick={() => setCountryDropdownOpen(!countryDropdownOpen)}
-                className="flex items-center justify-center gap-2 h-[40px] md:h-[48px] px-3 md:px-4 bg-button-ghost-bg border border-button-ghost-border rounded-[12px] hover:bg-background-panel transition-colors"
+                className="flex items-center justify-center gap-2 h-[40px] md:h-[48px] px-3 md:px-4 bg-button-ghost-bg  rounded-[12px] hover:bg-background-panel transition-colors"
               >
                 <Globe className="w-3 h-3 md:w-4 md:h-4 text-icon-primary" />
-                <span className="text-[12px] md:text-[14px] leading-[20px] text-button-outline-fg font-poppins font-medium whitespace-nowrap">
-                  {selectedCountry} {getCountryFlag()}
+                <span className="text-[12px] md:text-[14px] leading-[20px] text-button-outline-fg font-poppins font-medium whitespace-nowrap flex gap-1 items-center">
+                  {selectedCountry}{" "}
+                  <img
+                    src={`https://flagcdn.com/64x48/${getCountryFlag().toLowerCase()}.png`}
+                    alt={getCountryFlag()}
+                    style={{
+                      width: "12px",
+                      height: "12px",
+                      objectFit: "cover", // or "contain"
+                      borderRadius: "2px",
+                    }}
+                  />
                 </span>
                 <ChevronDown className="w-3 h-3 md:w-4 md:h-4 text-icon-primary" />
               </button>
@@ -138,9 +148,19 @@ const HeaderMain = () => {
                         setSelectedCountry(country.name);
                         setCountryDropdownOpen(false);
                       }}
-                      className="w-full text-left px-4 py-2 text-[14px] text-text-primary hover:bg-background-panel transition-colors font-poppins"
+                      className="w-full text-left px-4 py-2 text-[14px] text-text-primary hover:bg-background-panel transition-colors font-poppins flex gap-1 items-center"
                     >
-                      {country.name} {country.flag}
+                      {country.name}{" "}
+                      <img
+                        src={`https://flagcdn.com/64x48/${country.flag.toLowerCase()}.png`}
+                        alt={country.flag}
+                        style={{
+                          width: "12px",
+                          height: "12px",
+                          objectFit: "cover", // or "contain"
+                          borderRadius: "2px",
+                        }}
+                      />
                     </button>
                   ))}
                 </div>
@@ -151,7 +171,7 @@ const HeaderMain = () => {
             <div className="relative hidden sm:block">
               <button
                 onClick={() => setLangDropdownOpen(!langDropdownOpen)}
-                className="flex items-center justify-center gap-1 md:gap-2 h-[40px] md:h-[48px] px-2 md:px-3 lg:px-4 bg-button-ghost-bg border border-button-ghost-border rounded-[12px] hover:bg-background-panel transition-colors"
+                className="flex items-center justify-center gap-1 md:gap-2 h-[40px] md:h-[48px] px-2 md:px-3 lg:px-4 bg-button-ghost-bg  rounded-[12px] hover:bg-background-panel transition-colors"
               >
                 <Globe className="w-3 h-3 md:w-4 md:h-4 text-icon-primary" />
                 <span className="text-[12px] md:text-[14px] leading-[20px] text-button-outline-fg font-poppins font-medium">
