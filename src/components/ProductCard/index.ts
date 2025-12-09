@@ -10,3 +10,4 @@ export type { ProductTagProps, ProductTagType } from "./ProductTag";
 export { FavoriteButton } from "./FavoriteButton";
 export type { FavoriteButtonProps } from "./FavoriteButton";
 
+

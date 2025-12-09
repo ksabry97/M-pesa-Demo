@@ -94,7 +94,7 @@ export const ServicesCarousel = ({
   };
 
   return (
-    <div className={`relative w-full ${className}`}>
+    <div className={`relative w-full bg-transparent ${className}`}>
       {/* Carousel Container */}
       <div className="relative h-[600px] w-full overflow-hidden rounded-[12px]">
         {/* Slides Container with Transition */}
