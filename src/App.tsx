@@ -28,7 +28,7 @@ function App() {
             <Route path="otp" element={ <OTPPage />} />
             <Route path="reset-password" element={<ResetPasswordPage />} />
           </Route>
-          <Route path="merchant-services" element={<MultiService />} />
+          <Route path="merchant-services" element={<SingleService />} />
 
         </Route>
       </Routes>

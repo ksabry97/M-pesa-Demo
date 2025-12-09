@@ -82,22 +82,60 @@ function MultiService() {
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
           {/* Left Section */}
           <div className="lg:col-span-2 space-y-6">
-            {/* Service Info Card - similar to SingleService */}
+            {/* Service Info Card */}
             <div className="bg-white rounded-2xl shadow p-6">
+              {/* Category Badge */}
               <div className="inline-block bg-gray-900 text-white text-xs font-medium px-3 py-1 rounded mb-4">
                 {serviceData.category}
               </div>
 
+              {/* Title + Price */}
               <div className="flex justify-between items-start mb-4">
-                <h1 className="text-3xl font-bold text-gray-900 flex items-center gap-2">
-                  {serviceData.name}
-                  {serviceData.verified && <BadgeCheck className="w-5 h-5 text-accent-darker2" />}
-                </h1>
+                <div className="flex items-center gap-2">
+                  <div className="w-12 h-12 bg-gray-200 rounded-lg flex items-center justify-center flex-shrink-0">
+                    <span className="text-2xl">🍖</span>
+                  </div>
+                  <h1 className="text-2xl font-bold text-gray-900 flex items-center gap-2">
+                    {serviceData.name}
+                    {serviceData.verified && <BadgeCheck className="w-5 h-5 text-accent-darker2" />}
+                  </h1>
+                </div>
+
+                <div className="text-right">
+                  <p className="text-3xl font-bold text-gray-900">${serviceData.price.toLocaleString()}</p>
+                  <p className="text-sm text-gray-500">per session</p>
+                </div>
               </div>
 
-              <p className="text-gray-700 text-base mb-6">
-                {serviceData.description}
-              </p>
+              {/* Rating + Duration */}
+              <div className="flex items-center gap-6 mb-4">
+                <div className="flex items-center gap-1">
+                  {[...Array(5)].map((_, i) => (
+                    <Star 
+                      key={i} 
+                      className={`w-4 h-4 ${
+                        i < Math.floor(serviceData.rating)
+                          ? 'fill-orange-400 text-orange-400'
+                          : 'text-gray-300'
+                      }`}
+                    />
+                  ))}
+                  <span className="text-sm font-semibold text-gray-900 ml-1">{serviceData.rating}</span>
+                  <span className="text-sm text-gray-500">({serviceData.reviews} reviews)</span>
+                </div>
+
+                <div className="flex items-center gap-1 text-gray-600">
+                  <Clock className="w-4 h-4" />
+                  <span className="text-sm">{serviceData.duration} minutes</span>
+                </div>
+              </div>
+
+              {/* Description */}
+              <div className="border-t pt-4">
+                <p className="text-gray-700 text-base">
+                  {serviceData.description}
+                </p>
+              </div>
             </div>
 
             <Packages onPackageSelect={handlePackageSelect} />
