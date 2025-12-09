@@ -8,17 +8,17 @@ export interface ProductTagProps {
    * Type of tag - determines styling
    */
   type: ProductTagType;
-  
+
   /**
    * Text content of the tag
    */
   text: string;
-  
+
   /**
    * Optional icon (if not provided, default icon based on type will be used)
    */
   icon?: ReactNode;
-  
+
   /**
    * Optional className
    */
@@ -27,7 +27,7 @@ export interface ProductTagProps {
 
 /**
  * ProductTag Component
- * 
+ *
  * Displays a tag badge on product cards. Supports different types:
  * - category: Dark background (#1c2024)
  * - location: Orange/red background (rgba(223,38,0,0.82))
@@ -79,6 +79,7 @@ export const ProductTag = ({
         py-1
         rounded
         shrink-0
+        w-fit
         ${className}
       `}
     >
@@ -95,4 +96,3 @@ export const ProductTag = ({
 };
 
 export default ProductTag;
-

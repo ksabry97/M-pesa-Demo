@@ -7,22 +7,22 @@ export interface ServiceCarouselItem {
    * Icon to display (for reference, but we'll use background image in carousel)
    */
   icon?: ServiceCardProps["icon"];
-  
+
   /**
    * Title of the service
    */
   title: string;
-  
+
   /**
    * Description/subtitle of the service
    */
   description: string;
-  
+
   /**
    * Background image URL for the carousel slide
    */
   backgroundImage?: string;
-  
+
   /**
    * Optional click handler
    */
@@ -34,17 +34,17 @@ export interface ServicesCarouselProps {
    * Array of services to display in the carousel
    */
   services: ServiceCarouselItem[];
-  
+
   /**
    * Optional click handler for service cards
    */
   onServiceClick?: (index: number) => void;
-  
+
   /**
    * Auto-play interval in milliseconds (0 to disable)
    */
   autoPlay?: number;
-  
+
   /**
    * Optional className
    */
@@ -53,7 +53,7 @@ export interface ServicesCarouselProps {
 
 /**
  * ServicesCarousel Component
- * 
+ *
  * A banner-style carousel component matching the Figma design.
  * Displays services with background images, text overlays, and navigation arrows.
  */
@@ -125,12 +125,12 @@ export const ServicesCarousel = ({
                     <h2 className="text-[40px] font-bold leading-[48px] tracking-[-0.3px] text-white">
                       {service.title}
                     </h2>
-                    
+
                     {/* Description - matches Figma Body-2 styling */}
                     <p className="text-base font-normal leading-6 text-white">
                       {service.description}
                     </p>
-                    
+
                     {/* Book Now Button - matches Figma button styling */}
                     <button
                       onClick={() => {
