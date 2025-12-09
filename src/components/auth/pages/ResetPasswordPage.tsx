@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { PasswordCreation } from '@/features/auth/components/PasswordCreation';
-import { MessagePopup } from '@/features/auth/components/MessagePopup';
+import { PasswordCreation } from '@/components/auth/components/PasswordCreation';
+import { MessagePopup } from '@/components/auth/components/MessagePopup';
 import verificationGif from '@/assets/passReset.gif';
 
 function ResetPasswordPage() {
@@ -30,7 +30,7 @@ function ResetPasswordPage() {
         open={showSuccess}
         onClose={() => {
           setShowSuccess(false);
-          navigate('/auth/sign-in');
+          navigate('/auth/login');
         }}
         icon={<img src={verificationGif} alt="success" className="w-[110px] h-[110px]" />}
         title={<span className="text-black font-bold text-center">Password set successfully</span>}
@@ -43,9 +43,9 @@ function ResetPasswordPage() {
           label: 'Back to Login',
           onClick: () => {
             setShowSuccess(false);
-            navigate('/auth/sign-in');
+            navigate('/auth/login');
           },
-          className: 'bg-buttonBlue text-white w-full',
+          className: 'bg-accent-darker2 text-white w-full',
         }}
       />
     </>

@@ -15,7 +15,7 @@ import { useRegistrationStore } from '../../store/useRegistrationStore';
 import type { Step2Props } from '@/types/auth';
 
 export const Step2 = ({ onNext, onPrevious, onDataChange }: Step2Props) => {
-  const { t } = useTranslation("auth");
+  const { t } = useTranslation(); // Remove "auth" namespace
   const { fullName, phoneNumber, countryCode, updateStep2 } = useRegistrationStore();
   const [showConfirmDialog, setShowConfirmDialog] = useState(false);
 
@@ -57,22 +57,19 @@ export const Step2 = ({ onNext, onPrevious, onDataChange }: Step2Props) => {
   return (
     <div className="w-full flex flex-col">
       <div className="space-y-6 bg-white rounded-2xl border border-gray-200 p-8 shadow-sm">
-        {/* Title */}
         <div className="space-y-2">
           <h1 className="text-2xl font-bold text-gray-900">
-            Personal Information
+            {t("auth.personalInfo")}
           </h1>
           <p className="text-sm text-gray-600">
-            Enter your details to create your account
+            {t("auth.enterDetailsToCreate")}
           </p>
         </div>
 
-        {/* Form Fields */}
         <div className="space-y-5">
-          {/* Full Name */}
           <div className="space-y-2">
             <Label htmlFor="fullName" className="text-sm font-medium text-gray-900">
-              Full Name
+              {t("auth.fullName")}
             </Label>
             <Input
               id="fullName"
@@ -80,18 +77,17 @@ export const Step2 = ({ onNext, onPrevious, onDataChange }: Step2Props) => {
               value={fullName}
               onChange={(e) => handleFullNameChange(e.target.value)}
               placeholder="John Doe"
-              className="h-12 bg-gray-50 hover:bg-gray-100 border-gray-300 text-base rounded-xl transition-all"
+              className="h-12 bg-gray-50 border-gray-300 text-base rounded-xl transition-all"
             />
           </div>
 
-          {/* Phone Number */}
           <div className="space-y-2">
             <Label htmlFor="phoneNumber" className="text-sm font-medium text-gray-900">
-              Phone Number
+              {t("auth.phoneNumber")}
             </Label>
             <div className="flex gap-3">
               <Select value={countryCode} onValueChange={handleCountryCodeChange}>
-                <SelectTrigger className="w-[130px] bg-gray-50 hover:bg-gray-100 rounded-xl h-12 border-gray-300 transition-all">
+                <SelectTrigger className="w-[130px] bg-gray-50 rounded-xl h-12 border-gray-300 transition-all">
                   <SelectValue />
                 </SelectTrigger>
                 <SelectContent className="rounded-xl">
@@ -111,61 +107,59 @@ export const Step2 = ({ onNext, onPrevious, onDataChange }: Step2Props) => {
                 placeholder="712345678"
                 value={phoneNumber}
                 onChange={(e) => handlePhoneNumberChange(e.target.value)}
-                className="flex-1 h-12 bg-gray-50 hover:bg-gray-100 border-gray-300 text-base rounded-xl transition-all"
+                className="flex-1 h-12 bg-gray-50 border-gray-300 text-base rounded-xl transition-all"
               />
             </div>
           </div>
         </div>
 
-        {/* Buttons */}
         <div className="flex justify-between gap-3 pt-4">
           <Button
             onClick={onPrevious}
             variant="outline"
-            className="px-8 h-11 text-base font-medium rounded-xl border-2 border-gray-300 text-gray-700 hover:bg-gray-100 transition-all"
+            className="px-8 h-11 text-base font-medium rounded-xl border-2 border-gray-300 text-gray-700 transition-all"
           >
-            Back
+            {t("auth.back")}
           </Button>
           <Button
             onClick={handleNext}
             disabled={!fullName || !phoneNumber}
             className={`px-12 h-11 text-base font-medium rounded-xl transition-all ${
               fullName && phoneNumber
-                ? "bg-accent-darker2 text-white hover:bg-accent-darker"
+                ? "bg-accent-darker2 text-white "
                 : "bg-gray-300 text-gray-500 cursor-not-allowed"
             }`}
           >
-            Next
+            {t("auth.next")}
           </Button>
         </div>
       </div>
 
-      {/* Confirmation Dialog */}
       <MessagePopup
         open={showConfirmDialog}
         onClose={() => setShowConfirmDialog(false)}
-        title={t("step2.confirmTitle")}
+        title={t("auth.step2.confirmTitle")}
         message={
           <div className="space-y-1">
             <p className="text-gray-600">
-              {t("step2.confirmMessage")}{' '}
+              {t("auth.step2.confirmMessage")}{' '}
               <span className="font-semibold text-gray-900">
                 {countryCode} {phoneNumber}
               </span>
               .
             </p>
-            <p className="text-gray-600">{t("step2.confirmMessage2")}</p>
+            <p className="text-gray-600">{t("auth.step2.confirmMessage2")}</p>
           </div>
         }
         primaryButton={{
-          label: t("labels.confirm"),
+          label: t("auth.labels.confirm"),
           onClick: handleConfirm,
-          className: 'bg-accent-darker2 hover:bg-accent-darker text-white h-[52px] rounded-xl text-base font-medium order-1 w-[340px]',
+          className: 'bg-accent-darker2 text-white h-[52px] rounded-xl text-base font-medium order-1 w-[340px]',
         }}
         secondaryButton={{
-          label: t("labels.editNumber"),
+          label: t("auth.labels.editNumber"),
           onClick: handleEditNumber,
-          className: 'bg-transparent text-gray-900 hover:text-accent-darker2 border-0 h-[52px] rounded-xl text-base font-medium order-2 w-[340px]',
+          className: 'bg-transparent text-gray-900  border-0 h-[52px] rounded-xl text-base font-medium order-2 w-[340px]',
         }}
         contentClassName="max-w-[440px]"
         footerClassName="flex flex-col gap-3 items-center sm:flex-col"

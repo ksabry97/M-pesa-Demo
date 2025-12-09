@@ -27,7 +27,7 @@ export const PasswordInput = ({
           placeholder={placeholder}
           autoComplete={autoComplete}
           {...register}
-          className={`${error ? 'border-primaryRed bg-lightBg' : 'bg-lightBg'} ${className}`}
+          className={`${error ? 'border-primaryRed bg-gray-100' : 'bg-gray-100'} ${className}`}
         />
         <button
           type="button"

@@ -7,7 +7,7 @@ import { useRegistrationStore } from '../../store/useRegistrationStore';
 import type { Step3Props } from '@/types/auth';
 
 export const Step3 = ({ onNext, onPrevious, phoneNumber }: Step3Props) => {
-  const { t } = useTranslation("auth");
+  const { t } = useTranslation(); // Remove "auth" namespace
   const { countryCode, phoneNumber: storePhoneNumber, setPhoneVerified } = useRegistrationStore();
   const [showSuccessPopup, setShowSuccessPopup] = useState(false);
 
@@ -37,8 +37,8 @@ export const Step3 = ({ onNext, onPrevious, phoneNumber }: Step3Props) => {
       <div className="space-y-6 bg-white rounded-2xl border border-gray-200 p-8 shadow-sm">
         {/* OTP Verification */}
         <OTPVerification
-          title={t("step3.title")}
-          subtitle={t("step3.subtitle")}
+          title={t("auth.step3.title")}
+          subtitle={t("auth.step3.subtitle")}
           onVerify={handleVerify}
           onBack={onPrevious}
           onResend={handleResend}
@@ -54,10 +54,10 @@ export const Step3 = ({ onNext, onPrevious, phoneNumber }: Step3Props) => {
         open={showSuccessPopup}
         onClose={() => setShowSuccessPopup(false)}
         icon={<img src={successVerificationNom} alt="Verification Success" className="w-24 h-24" />}
-        title={t("step3.successTitle")}
-        message={t("step3.successMessage")}
+        title={t("auth.step3.successTitle")}
+        message={t("auth.step3.successMessage")}
         primaryButton={{
-          label: t("labels.continue"),
+          label: t("auth.labels.continue"),
           onClick: handleContinue,
           className: 'bg-accent-darker2 hover:bg-accent-darker text-white w-full h-[52px] rounded-xl',
         }}

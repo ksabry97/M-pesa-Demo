@@ -12,7 +12,7 @@ import { useRegistrationStore } from '../../store/useRegistrationStore';
 import type { Step1Props } from '@/types/auth';
 
 export const Step1BusinessLocation = ({ onNext }: Step1Props) => {
-  const { t } = useTranslation("auth");
+  const { t } = useTranslation(); // Remove "auth" namespace
   const { country, agreeToTerms, updateStep1 } = useRegistrationStore();
 
   const countries = [
@@ -37,35 +37,33 @@ export const Step1BusinessLocation = ({ onNext }: Step1Props) => {
 
   return (
     <div className="w-full flex flex-col">
-      <div className="space-y-6 bg-white rounded-2xl border border-gray-200 p-8 shadow-sm">
-        {/* Title */}
-        <div className="space-y-2">
-          <h3 className="text-2xl font-bold text-gray-900">
-            Where is your business located?
+      <div className="space-y-8 bg-white rounded-2xl border border-gray-200 p-10 shadow-sm">
+        <div className="space-y-3">
+          <h3 className="text-3xl font-bold text-gray-900">
+            {t("auth.step1.title")}
           </h3>
-          <p className="text-sm text-gray-600">
-            Select your country to continue
+          <p className="text-base text-gray-600">
+            {t("auth.step1.subtitle")}
           </p>
         </div>
 
-        {/* Country Select */}
         <div className="space-y-3">
-          <label className="text-sm font-medium text-gray-900 block">
-            Country
+          <label className="text-base font-medium text-gray-900 block">
+            {t("auth.step1.countryLabel")}
           </label>
           <Select value={country} onValueChange={handleCountryChange}>
-            <SelectTrigger className="w-full bg-gray-50 hover:bg-gray-100 rounded-xl h-12 text-base border-gray-300 transition-all">
-              <SelectValue placeholder="Select a country" />
+            <SelectTrigger className="w-full bg-gray-50 hover:bg-gray-100 rounded-xl h-14 text-lg border-gray-300 transition-all">
+              <SelectValue placeholder={t("auth.step1.selectCountry")} />
             </SelectTrigger>
             <SelectContent className="rounded-xl">
               {countries.map((countryItem) => (
                 <SelectItem 
                   key={countryItem.name} 
                   value={countryItem.name}
-                  className="text-base py-2 cursor-pointer"
+                  className="text-lg py-3 cursor-pointer"
                 >
-                  <span className="flex items-center gap-2">
-                    <span className="text-xl">{countryItem.flag}</span>
+                  <span className="flex items-center gap-3">
+                    <span className="text-2xl">{countryItem.flag}</span>
                     <span>{countryItem.name}</span>
                   </span>
                 </SelectItem>
@@ -74,41 +72,39 @@ export const Step1BusinessLocation = ({ onNext }: Step1Props) => {
           </Select>
         </div>
 
-        {/* Terms Checkbox */}
         <div className="flex items-start gap-3 pt-2">
           <Checkbox
             id="terms"
             checked={agreeToTerms}
             onCheckedChange={handleTermsChange}
-            className="mt-0.5"
+            className="mt-1 w-5 h-5"
           />
           <label
             htmlFor="terms"
-            className="text-sm text-gray-700 leading-relaxed cursor-pointer flex-1"
+            className="text-base text-gray-700 leading-relaxed cursor-pointer flex-1"
           >
-            I agree to the{' '}
+            {t("auth.step1.agreeToTerms")}{' '}
             <a href="#" className="text-accent-darker2 hover:text-accent-darker font-medium hover:underline">
-              User Agreement
+              {t("auth.step1.userAgreement")}
             </a>{' '}
-            and{' '}
+            {t("auth.step1.and")}{' '}
             <a href="#" className="text-accent-darker2 hover:text-accent-darker font-medium hover:underline">
-              Terms & Conditions
+              {t("auth.step1.termsConditions")}
             </a>
           </label>
         </div>
 
-        {/* Next Button */}
         <div className="flex justify-end pt-4">
           <Button
             onClick={handleNext}
             disabled={!agreeToTerms}
-            className={`w-full sm:w-auto px-12 h-11 text-base font-medium rounded-xl transition-all ${
+            className={`w-full sm:w-auto px-16 h-12 text-lg font-medium rounded-xl transition-all ${
               agreeToTerms
                 ? "bg-accent-darker2 text-white hover:bg-accent-darker"
                 : "bg-gray-300 text-gray-500 cursor-not-allowed"
             }`}
           >
-            Next
+            {t("auth.next")}
           </Button>
         </div>
       </div>

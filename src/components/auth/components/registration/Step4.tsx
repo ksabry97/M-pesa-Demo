@@ -7,7 +7,7 @@ import { useRegistrationStore } from '../../store/useRegistrationStore';
 import type { Step4Props } from '@/types/auth';
 
 export const Step4 = ({ onNext, onPrevious }: Step4Props) => {
-  const { t } = useTranslation("auth");
+  const { t } = useTranslation();
   const { updateStep4 } = useRegistrationStore();
   const [showSuccessPopup, setShowSuccessPopup] = useState(false);
 
@@ -27,9 +27,9 @@ export const Step4 = ({ onNext, onPrevious }: Step4Props) => {
       <div className="space-y-6 bg-white rounded-2xl border border-gray-200 p-8 shadow-sm">
         {/* Password Creation */}
         <PasswordCreation
-          title={t("step4.title")}
-          subtitle={t("step4.subtitle")}
-          buttonLabel={t("step4.buttonLabel")}
+          title={t("auth.step4.title")}
+          subtitle={t("auth.step4.subtitle")}
+          buttonLabel={t("auth.step4.buttonLabel")}
           onSubmit={handlePasswordSubmit}
           onBack={onPrevious}
           buttonClassName="bg-accent-darker2 hover:bg-accent-darker text-white"
@@ -42,10 +42,10 @@ export const Step4 = ({ onNext, onPrevious }: Step4Props) => {
         open={showSuccessPopup}
         onClose={() => setShowSuccessPopup(false)}
         icon={<img src={verficayionSetup} alt="PIN Success" className="w-24 h-24" />}
-        title={t("step4.successTitle")}
-        message={t("step4.successMessage")}
+        title={t("auth.step4.successTitle")}
+        message={t("auth.step4.successMessage")}
         primaryButton={{
-          label: t("labels.done"),
+          label: t("auth.labels.done"),
           onClick: handleContinue,
           className: 'bg-accent-darker2 hover:bg-accent-darker text-white w-full h-[52px] rounded-xl',
         }}

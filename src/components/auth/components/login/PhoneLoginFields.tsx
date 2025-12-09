@@ -31,7 +31,7 @@ export const PhoneLoginFields = ({
         </Label>
         <div className="flex gap-1">
           <Select value={countryCode} onValueChange={onCountryCodeChange}>
-            <SelectTrigger className="w-[120px] bg-lightBg rounded-xl">
+            <SelectTrigger className="w-[120px] bg-gray-100 rounded-xl">
               <SelectValue placeholder="Country" />
             </SelectTrigger>
             <SelectContent>
@@ -55,8 +55,8 @@ export const PhoneLoginFields = ({
               onPhoneNumberChange(value);
               form.setValue('phoneNumber', value, { shouldValidate: true });
             }}
-            className={`flex-1 bg-lightBg rounded-xl ${
-              form.formState.errors.phoneNumber ? 'border-primaryRed' : ''
+            className={`flex-1 bg-gray-100 rounded-xl ${
+              form.formState.errors.phoneNumber ? 'border-red-500' : ''
             }`}
           />
         </div>

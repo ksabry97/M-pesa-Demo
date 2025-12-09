@@ -2,5 +2,107 @@
   "welcome": "Bonjour App",
   "searchPlaceholder": "Rechercher des produits...",
   "search": "Rechercher",
-  "login": "Connexion"
+  "login": "Connexion",
+  "auth": {
+    "signUp": "S'inscrire",
+    "signIn": "Se connecter",
+    "step": "Étape",
+    "of": "sur",
+    "next": "Suivant",
+    "previous": "Précédent",
+    "back": "Retour",
+    "submit": "Soumettre",
+    "cancel": "Annuler",
+    "continue": "Continuer",
+    "businessLocation": "Localisation de l'entreprise",
+    "businessInfo": "Informations sur l'entreprise",
+    "personalInfo": "Informations personnelles",
+    "accountDetails": "Détails du compte",
+    "verification": "Vérification",
+    "email": "Email",
+    "emailAddress": "Adresse e-mail",
+    "password": "Mot de passe",
+    "confirmPassword": "Confirmer le mot de passe",
+    "phoneNumber": "Numéro de téléphone",
+    "businessName": "Nom de l'entreprise",
+    "fullName": "Nom complet",
+    "address": "Adresse",
+    "city": "Ville",
+    "country": "Pays",
+    "postalCode": "Code postal",
+    "alreadyHaveAccount": "Vous avez déjà un compte?",
+    "dontHaveAccount": "Vous n'avez pas de compte?",
+    "forgotPassword": "Mot de passe oublié?",
+    "registerNow": "S'inscrire maintenant",
+    "signInNow": "Se connecter maintenant",
+    "backToSignIn": "Retour à la connexion",
+    "createAccount": "Créer un compte",
+    "welcomeBack": "Bon retour",
+    "signInToAccount": "Connectez-vous à votre compte",
+    "enterDetails": "Entrez vos détails pour continuer",
+    "enterDetailsToCreate": "Entrez vos détails pour créer votre compte",
+    "rememberMe": "Se souvenir de moi",
+    "orLoginWith": "Ou se connecter avec",
+    "loginWithEmail": "Se connecter avec l'e-mail",
+    "loginWithPhone": "Se connecter avec le numéro de téléphone",
+    "demoCredentials": "Identifiants de démonstration:",
+    "step1": {
+      "title": "Où se trouve votre entreprise?",
+      "subtitle": "Sélectionnez votre pays pour continuer",
+      "countryLabel": "Pays",
+      "selectCountry": "Sélectionnez un pays",
+      "agreeToTerms": "J'accepte les",
+      "userAgreement": "Conditions d'utilisation",
+      "and": "et",
+      "termsConditions": "Termes et conditions"
+    },
+    "step2": {
+      "confirmTitle": "Confirmez votre numéro de téléphone",
+      "confirmMessage": "Nous enverrons un code de vérification à",
+      "confirmMessage2": "Ce numéro est-il correct?"
+    },
+    "step3": {
+      "title": "Vérifiez votre numéro de téléphone",
+      "subtitle": "Entrez le code de vérification envoyé à votre téléphone",
+      "successTitle": "Téléphone vérifié avec succès!",
+      "successMessage": "Votre numéro de téléphone a été vérifié. Vous pouvez maintenant continuer votre inscription."
+    },
+    "step4": {
+      "title": "Créez votre mot de passe",
+      "subtitle": "Choisissez un mot de passe fort pour sécuriser votre compte",
+      "buttonLabel": "Créer un mot de passe",
+      "successTitle": "Mot de passe créé avec succès!",
+      "successMessage": "Votre compte a été configuré. Vous pouvez maintenant commencer à utiliser l'application."
+    },
+    "passwordCreation": {
+      "weak": "Mot de passe faible",
+      "weakTitle": "Le mot de passe est trop faible",
+      "weakMessage": "Essayez d'ajouter plus de caractères, de chiffres ou de symboles spéciaux",
+      "medium": "Mot de passe moyen",
+      "mediumTitle": "Le mot de passe s'améliore",
+      "mediumMessage": "Envisagez d'ajouter plus de variété pour le rendre plus fort",
+      "strong": "Mot de passe fort",
+      "strongTitle": "Excellent! Votre mot de passe est fort"
+    },
+    "otpVerification": {
+      "didntGetCode": "Vous n'avez pas reçu le code?",
+      "invalidCredentials": "Identifiants invalides",
+      "invalidCredentialsMessage": "Le code que vous avez entré est incorrect. Veuillez réessayer."
+    },
+    "labels": {
+      "confirm": "Confirmer",
+      "editNumber": "Modifier le numéro",
+      "continue": "Continuer",
+      "back": "Retour",
+      "password": "Mot de passe",
+      "resend": "Renvoyer",
+      "retry": "Réessayer",
+      "done": "Terminé"
+    },
+    "placeholders": {
+      "enterNewPassword": "Entrez votre nouveau mot de passe",
+      "enterEmail": "Entrez votre e-mail",
+      "enterPassword": "Entrez le mot de passe"
+    }
+  }
 }

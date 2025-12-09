@@ -32,7 +32,7 @@ export const PasswordCreation = ({
   onSubmit,
   onBack,
 }: PasswordCreationProps) => {
-  const { t } = useTranslation("auth");
+  const { t } = useTranslation(); // Remove "auth" namespace
   const [showPassword, setShowPassword] = useState(false);
   const [passwordStrength, setPasswordStrength] = useState(0);
 
@@ -59,25 +59,25 @@ export const PasswordCreation = ({
       };
     if (strength < 50)
       return {
-        label: t("passwordCreation.weak"),
-        title: t("passwordCreation.weakTitle"),
-        message: t("passwordCreation.weakMessage"),
-        color: 'text-primaryRed',
-        bgColor: 'bg-primaryRed',
-        textColor: 'text-primaryRed',
+        label: t("auth.passwordCreation.weak"),
+        title: t("auth.passwordCreation.weakTitle"),
+        message: t("auth.passwordCreation.weakMessage"),
+        color: 'text-red-600',
+        bgColor: 'bg-red-600',
+        textColor: 'text-red-600',
       };
     if (strength < 70)
       return {
-        label: t("passwordCreation.medium"),
-        title: t("passwordCreation.mediumTitle"),
-        message: t("passwordCreation.mediumMessage"),
+        label: t("auth.passwordCreation.medium"),
+        title: t("auth.passwordCreation.mediumTitle"),
+        message: t("auth.passwordCreation.mediumMessage"),
         color: 'text-yellow-600',
         bgColor: 'bg-yellow-500',
         textColor: 'text-yellow-600',
       };
     return {
-      label: t("passwordCreation.strong"),
-      title: t("passwordCreation.strongTitle"),
+      label: t("auth.passwordCreation.strong"),
+      title: t("auth.passwordCreation.strongTitle"),
       message: '',
       color: 'text-green-600',
       bgColor: 'bg-green-500',
@@ -107,7 +107,7 @@ export const PasswordCreation = ({
 
   const strengthDetails = getStrengthDetails(passwordStrength);
   const progressWidth =
-    strengthDetails.label === t("passwordCreation.strong") ? '100%' : `${Math.min(passwordStrength, 100)}%`;
+    strengthDetails.label === t("auth.passwordCreation.strong") ? '100%' : `${Math.min(passwordStrength, 100)}%`;
   const canContinue = isValid && passwordStrength >= 50;
 
   const handleFormSubmit = (data: PasswordFormData) => {
@@ -115,50 +115,50 @@ export const PasswordCreation = ({
   };
 
   return (
-    <div className="flex flex-col items-center justify-center w-full ">
+    <div className="flex flex-col items-center justify-center w-full max-w-6xl mx-auto">
       {/* Title */}
-      <h1 className="text-2xl font-semibold text-primaryBlack mb-2">{title}</h1>
+      <h1 className="text-3xl font-semibold text-black mb-3">{title}</h1>
 
       {/* Subtitle */}
-      <p className="text-sm text-primaryGray mb-8 text-center">{subtitle}</p>
+      <p className="text-base text-gray-600 mb-10 text-center">{subtitle}</p>
 
       {/* Form */}
-      <form onSubmit={handleSubmit(handleFormSubmit)} className="w-full space-y-5">
+      <form onSubmit={handleSubmit(handleFormSubmit)} className="w-full space-y-6">
         {/* Password Field */}
         <div>
-          <Label htmlFor="password" className="mb-2 block text-sm font-normal text-primaryGray">
-            {t("labels.password")}
+          <Label htmlFor="password" className="mb-2 block text-base font-normal text-gray-900">
+            {t("auth.labels.password")}
           </Label>
           <div className="relative">
             <Input
               id="password"
               type={showPassword ? 'text' : 'password'}
-              placeholder={t("placeholders.enterNewPassword")}
+              placeholder={t("auth.placeholders.enterNewPassword")}
               {...register('password')}
-              className={errors.password ? 'border-primaryRed bg-gray-50' : 'bg-gray-50'}
+              className={`h-14 text-lg ${errors.password ? 'border-primaryRed bg-gray-50' : 'bg-gray-50'}`}
             />
             <button
               type="button"
               onClick={() => setShowPassword(!showPassword)}
-              className="absolute right-3 top-1/2 -translate-y-1/2 text-primaryGray hover:text-primaryBlack"
+              className="absolute right-4 top-1/2 -translate-y-1/2 text-primaryGray hover:text-primaryBlack"
             >
-              {showPassword ? <EyeOff className="h-5 w-5" /> : <Eye className="h-5 w-5" />}
+              {showPassword ? <EyeOff className="h-6 w-6" /> : <Eye className="h-6 w-6" />}
             </button>
           </div>
         </div>
 
         {/* Password Strength */}
         {password && (
-          <div className="space-y-3">
+          <div className="space-y-4">
             {/* Strength Label */}
             {strengthDetails.label && (
-              <p className={`text-sm font-medium ${strengthDetails.textColor}`}>
+              <p className={`text-base font-medium ${strengthDetails.textColor}`}>
                 {strengthDetails.label}
               </p>
             )}
 
             {/* Progress Bar */}
-            <div className="w-full h-2 bg-gray-200 rounded-full overflow-hidden">
+            <div className="w-full h-2.5 bg-gray-200 rounded-full overflow-hidden">
               <div
                 className={`h-full transition-all duration-300 ${strengthDetails.bgColor}`}
                 style={{ width: progressWidth }}
@@ -167,15 +167,15 @@ export const PasswordCreation = ({
 
             {/* Messages with Info Icon */}
             {strengthDetails.title && (
-              <div className="flex items-start gap-2">
-                <img src={InfoIcon} alt="info" className="w-5 h-5 mt-0.5 flex-shrink-0" />
-                <ul className="space-y-1">
-                  <li className="text-sm text-primaryGray flex items-start">
+              <div className="flex items-start gap-3">
+                <img src={InfoIcon} alt="info" className="w-6 h-6 mt-0.5 flex-shrink-0" />
+                <ul className="space-y-2">
+                  <li className="text-base text-gray-600 flex items-start">
                     <span className="mr-2">•</span>
                     <span>{strengthDetails.title}</span>
                   </li>
                   {strengthDetails.message && (
-                    <li className="text-sm text-primaryGray flex items-start">
+                    <li className="text-base text-gray-600 flex items-start">
                       <span className="mr-2">•</span>
                       <span>{strengthDetails.message}</span>
                     </li>
@@ -187,12 +187,12 @@ export const PasswordCreation = ({
         )}
 
         {/* Submit Button */}
-        <div className="flex justify-center pt-4">
+        <div className="flex justify-center pt-6">
           <Button
             type="submit"
             disabled={!canContinue}
-            className={`h-[52px] min-w-[260px] max-w-[260px] ${
-              !canContinue ? 'bg-disabledDarkGray text-disabledLightGray' : 'bg-buttonBlue'
+            className={`h-14 text-lg min-w-[320px] max-w-[320px] rounded-xl ${
+              !canContinue ? 'bg-gray-950 text-gray-500' : 'bg-accent-darker2 text-white'
             }`}
           >
             {buttonLabel}
@@ -206,9 +206,9 @@ export const PasswordCreation = ({
               type="button"
               onClick={onBack}
               variant="default"
-              className="h-[52px] min-w-[260px] max-w-[260px]"
+              className="h-14 text-lg min-w-[320px] max-w-[320px] rounded-xl"
             >
-              {t("labels.back")}
+              {t("auth.labels.back")}
             </Button>
           </div>
         )}

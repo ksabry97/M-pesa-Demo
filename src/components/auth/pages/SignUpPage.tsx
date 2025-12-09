@@ -9,7 +9,7 @@ import { HomePage } from '@/pages';
 
 
 export const SignUpPage = () => {
-  const { t } = useTranslation("auth");
+  const { t } = useTranslation();
   const navigate = useNavigate();
   const [currentStep, setCurrentStep] = useState(1);
   const totalSteps = 4;
@@ -55,27 +55,27 @@ export const SignUpPage = () => {
   };
 
   return (
-    <div className="min-h-screen flex flex-col bg-gray-50">
-      {/* Main Content */}
-      <div className="flex-1 flex items-start justify-center px-6 pt-8 pb-8">
-        <div className="w-full max-w-6xl">
-          {/* Progress Bar */}
-          <div className="mb-4">
-            <p className="text-sm font-medium text-gray-700 mb-2">
-              Step {currentStep} of {totalSteps}
-            </p>
-            <div className="h-1.5 w-full bg-gray-200 overflow-hidden rounded-full">
-              <div
-                className="h-full bg-accent-darker2 transition-all duration-500 ease-out rounded-full"
-                style={{ width: `${(currentStep / totalSteps) * 100}%` }}
-              />
-            </div>
-          </div>
-          {/* Step Content */}
-          {renderStep()}
+     <div className="min-h-screen flex items-start mt-8 justify-center px-6">
+    <div className="w-full max-w-[900px] min-w-[600px]">
+      
+      {/* Progress Bar */}
+      <div className="mb-6">
+        <p className="text-base font-medium text-gray-700 mb-3">
+          {t('auth.step')} {currentStep} {t('auth.of')} {totalSteps}
+        </p>
+        <div className="h-2 w-full bg-gray-200 overflow-hidden rounded-full">
+          <div
+            className="h-full bg-accent-darker2 transition-all duration-500 ease-out rounded-full"
+            style={{ width: `${(currentStep / totalSteps) * 100}%` }}
+          />
         </div>
       </div>
+
+      {/* Step Content */}
+      {renderStep()}
+      
     </div>
+  </div>
   );
 };
 

@@ -7,6 +7,8 @@ import Layout from "../src/components/Layout/Layout"
 import { AuthLayout } from './pages/authLayout';
 import  SignInPage  from '../src/components/auth/pages/SignInPage';
 import { SignUpPage } from '../src/components/auth/pages/SignUpPage';
+import OTPPage from './components/auth/pages/OTPPage';
+import ResetPasswordPage from './components/auth/pages/ResetPasswordPage';
 
 function App() {
   return (
@@ -21,7 +23,8 @@ function App() {
             <Route index element={<Navigate to="/auth/login" replace />} />
             <Route path="login" element={<SignInPage />} />
             <Route path="register" element={<SignUpPage />} />
-            {/* <Route path="forgot-password" element={<ForgotPassword />} /> */}
+            <Route path="otp" element={ <OTPPage />} />
+            <Route path="reset-password" element={<ResetPasswordPage />} />
           </Route>
         </Route>
       </Routes>
