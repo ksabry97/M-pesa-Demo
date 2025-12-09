@@ -88,10 +88,13 @@ export const StarRating = ({
         ))}
       </div>
       
-      {/* Review count */}
+      {/* Rating number and review count */}
+      <span className="text-[10px] leading-3 font-semibold text-text-primary">
+        {clampedRating.toFixed(1)}
+      </span>
       {reviewCount !== undefined && (
-        <span className="text-[10px] leading-3 font-semibold text-text-primary">
-          ({reviewCount})
+        <span className="text-[10px] leading-3 font-medium text-text-primary">
+          ({reviewCount} {reviewCount === 1 ? 'review' : 'reviews'})
         </span>
       )}
     </div>

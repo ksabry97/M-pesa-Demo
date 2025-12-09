@@ -108,3 +108,30 @@ export interface Filters {
   search?: string;
   sortBy?: SortOption;
 }
+
+// Booking types
+export type BookingStatus = 'pending' | 'ready' | 'active' | 'cancelled' | 'completed';
+
+export interface Booking {
+  id: string;
+  serviceId: string;
+  packageId?: string;
+  providerId: string;
+  userId: string;
+  status: BookingStatus;
+  bookingDate: string; // ISO date string
+  bookingTime: string; // Time string (e.g., "14:00")
+  duration: number; // in minutes
+  quantity: number;
+  totalPrice: number;
+  currency: string;
+  location?: string;
+  specialRequests?: string;
+  staffId?: string;
+  createdAt: string; // ISO date string
+  updatedAt: string; // ISO date string
+  cancelledAt?: string; // ISO date string
+  cancellationReason?: string;
+  paymentStatus: 'pending' | 'paid' | 'refunded';
+  paymentMethod?: string;
+}

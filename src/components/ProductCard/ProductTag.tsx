@@ -78,8 +78,7 @@ export const ProductTag = ({
         px-2
         py-1
         rounded
-        shrink-0
-        w-fit
+        ${type === "category" ? "w-fit max-w-[200px] sm:max-w-[250px] min-w-0" : "w-fit shrink-0"}
         ${className}
       `}
     >
@@ -88,7 +87,14 @@ export const ProductTag = ({
           {displayIcon}
         </div>
       )}
-      <span className="text-label-3 font-medium leading-4 whitespace-nowrap">
+      <span 
+        className={`
+          text-label-3 
+          font-medium 
+          leading-4 
+          ${type === "category" ? "truncate overflow-hidden text-ellipsis whitespace-nowrap min-w-0" : "whitespace-nowrap"}
+        `}
+      >
         {text}
       </span>
     </div>
