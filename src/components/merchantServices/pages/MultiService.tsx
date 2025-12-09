@@ -1,11 +1,11 @@
 import React, { useState } from 'react';
 import { Star, Clock, MapPin, ArrowLeft, Heart, Upload, BadgeCheck } from 'lucide-react';
-import Booking from './Booking';
+import Booking from '../components/Booking';
 import coverImg from '@/assets/profileCover.png';
-import Packages from './packages';
-import Terms from './Terms';
-import Reviews from './Reviews';
-import AppointmentPopup from './AppointmentPopup';
+import Packages from '../components/packages';
+import Terms from '../components/Terms';
+import Reviews from '../components/Reviews';
+import AppointmentPopup from '../components/AppointmentPopup';
 
 function MultiService() {
   const [selectedPackage, setSelectedPackage] = useState<{

@@ -1,12 +1,10 @@
 import React, { useState } from 'react'
 import { Star, Clock, MapPin, ShieldCheck, ArrowLeft, Heart, Upload, BadgeCheck } from 'lucide-react'
-import Booking from './Booking'
+import Booking from '../components/Booking'
 import coverImg from '@/assets/profileCover.png'
-import Packages from './packages'
-import Terms from './Terms'
-import Reviews from './Reviews'
-import AppointmentPopup from './AppointmentPopup'
-import AppointmentInline from './AppointmentInline'
+import Terms from '../components/Terms'
+import Reviews from '../components/Reviews'
+import AppointmentInline from '../components/AppointmentInline'
 
 function SingleService() {
   // No selectedPackage state needed for single service
