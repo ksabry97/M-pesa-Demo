@@ -102,7 +102,7 @@ function MultiService() {
                 </div>
 
                 <div className="text-right">
-                  <p className="text-3xl font-bold text-gray-900">${serviceData.price.toLocaleString()}</p>
+                  <p className="text-3xl font-semibold text-gray-900">${serviceData.price.toLocaleString()}</p>
                   <p className="text-sm text-gray-500">per session</p>
                 </div>
               </div>

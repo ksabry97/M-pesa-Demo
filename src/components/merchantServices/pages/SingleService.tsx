@@ -91,7 +91,7 @@ function SingleService() {
 
               {/* Title + Price */}
               <div className="flex justify-between items-start mb-4">
-                <h1 className="text-3xl font-bold text-gray-900 flex items-center gap-2">
+                <h1 className="text-3xl font-semibold text-gray-900 flex items-center gap-2">
                   {serviceData.name}
                   {serviceData.verified && <BadgeCheck className="w-5 h-5 text-accent-darker2" />}
                 </h1>
