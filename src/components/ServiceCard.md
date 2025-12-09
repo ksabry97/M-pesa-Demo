@@ -110,3 +110,4 @@ import { Sparkles } from 'lucide-react';
 See `src/pages/HomePage.tsx` for a complete example with multiple service cards in a grid layout.
 
 
+

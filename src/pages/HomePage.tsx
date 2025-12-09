@@ -134,7 +134,6 @@ const HomePage = () => {
         "https://images.unsplash.com/photo-1581578731548-c64695cc6952?w=1440&h=600&fit=crop", // Cleaning
         "https://images.unsplash.com/photo-1486262715619-67b85e0b08d3?w=1440&h=600&fit=crop", // Auto Mechanics
         "https://images.unsplash.com/photo-1586023492125-27b2c045efd7?w=1440&h=600&fit=crop", // Furniture
-        "https://images.unsplash.com/photo-1601581875305-f0a3e7c64b38?w=1440&h=600&fit=crop", // Moving
         "https://images.unsplash.com/photo-1561070791-2526d30994b5?w=1440&h=600&fit=crop", // Design
         "https://images.unsplash.com/photo-1498050108023-c5249f4df085?w=1440&h=600&fit=crop", // Programming
         "https://images.unsplash.com/photo-1621905251918-48416bd8575a?w=1440&h=600&fit=crop", // Plumbing

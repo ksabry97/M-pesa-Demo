@@ -8,14 +8,20 @@ import type {
   Cart,
   Filters,
   SortOption,
+  Booking,
+  BookingStatus,
 } from "../types";
 import {
   services,
   categories,
   providers,
+  bookings,
   getServiceById,
   getServicesByCategory,
   getServicesByProvider,
+  getBookingById,
+  getBookingsByUserId,
+  getBookingsByStatus,
 } from "../data";
 
 interface ProductStore {
@@ -23,6 +29,7 @@ interface ProductStore {
   services: Service[];
   categories: Category[];
   providers: Provider[];
+  bookings: Booking[];
 
   // Filters and Search
   filters: Filters;
@@ -37,6 +44,9 @@ interface ProductStore {
   // Selected items
   selectedCategory: string | null;
   selectedProvider: string | null;
+
+  // Current user (for bookings)
+  currentUserId: string;
 
   // Actions - Filters
   setFilters: (filters: Partial<Filters>) => void;
@@ -63,6 +73,14 @@ interface ProductStore {
   getServicesByCategory: (categoryId: string) => Service[];
   getServicesByProvider: (providerId: string) => Service[];
 
+  // Booking Actions
+  addBooking: (booking: Booking) => void;
+  updateBooking: (bookingId: string, updates: Partial<Booking>) => void;
+  cancelBooking: (bookingId: string, reason?: string) => void;
+  getBookingsByStatus: (status: BookingStatus) => Booking[];
+  getUserBookings: (userId?: string) => Booking[];
+  getBookingById: (bookingId: string) => Booking | undefined;
+
   // Helper
   calculateCartTotal: (items: CartItem[]) => number;
 }
@@ -84,12 +102,14 @@ export const useProductStore = create<ProductStore>()(
       services,
       categories,
       providers,
+      bookings,
       filters: initialFilters,
       searchQuery: "",
       cart: initialCart,
       favorites: [],
       selectedCategory: null,
       selectedProvider: null,
+      currentUserId: "user-001", // Default user ID
 
       // Filter actions
       setFilters: (newFilters) =>
@@ -288,6 +308,59 @@ export const useProductStore = create<ProductStore>()(
 
       getServicesByProvider: (providerId) => getServicesByProvider(providerId),
 
+      // Booking actions
+      addBooking: (booking) =>
+        set((state) => ({
+          bookings: [...state.bookings, booking],
+        })),
+
+      updateBooking: (bookingId, updates) =>
+        set((state) => ({
+          bookings: state.bookings.map((booking) =>
+            booking.id === bookingId
+              ? {
+                  ...booking,
+                  ...updates,
+                  updatedAt: new Date().toISOString(),
+                }
+              : booking
+          ),
+        })),
+
+      cancelBooking: (bookingId, reason) =>
+        set((state) => ({
+          bookings: state.bookings.map((booking) =>
+            booking.id === bookingId
+              ? {
+                  ...booking,
+                  status: "cancelled" as BookingStatus,
+                  cancelledAt: new Date().toISOString(),
+                  cancellationReason: reason,
+                  updatedAt: new Date().toISOString(),
+                }
+              : booking
+          ),
+        })),
+
+      getBookingsByStatus: (status) => {
+        const { bookings, currentUserId } = get();
+        return bookings.filter(
+          (booking) =>
+            booking.status === status && booking.userId === currentUserId
+        );
+      },
+
+      getUserBookings: (userId) => {
+        const { bookings, currentUserId } = get();
+        const targetUserId = userId || currentUserId;
+        return bookings.filter((booking) => booking.userId === targetUserId);
+      },
+
+      getBookingById: (bookingId) => {
+        const { bookings } = get();
+        return bookings.find((booking) => booking.id === bookingId);
+      },
+
       // Helper function to calculate cart total (not exposed in interface)
       calculateCartTotal: (items: CartItem[]): number => {
         return items.reduce((total, item) => {
@@ -314,6 +387,7 @@ export const useProductStore = create<ProductStore>()(
       partialize: (state) => ({
         cart: state.cart,
         favorites: state.favorites,
+        bookings: state.bookings,
       }),
     }
   )
