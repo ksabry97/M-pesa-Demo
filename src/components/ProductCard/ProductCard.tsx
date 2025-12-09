@@ -13,7 +13,8 @@ export interface ProductCardProps {
    * Alt text for the image
    */
   imageAlt?: string;
-
+  hideLocation?: boolean;
+  
   /**
    * Category tag text (e.g., "Food & Beverages")
    */
@@ -142,6 +143,7 @@ export const ProductCard = ({
   onBookNow,
   buttonText = "Book now",
   onClick,
+  hideLocation,
   className = "",
 }: ProductCardProps) => {
   // Format price: split integer and decimal parts
@@ -203,8 +205,12 @@ export const ProductCard = ({
         {/* Tags Overlay (Top Left) */}
         {(category || location || duration) && (
           <div className="absolute top-2 left-2 flex flex-col gap-2">
-            {category && <ProductTag type="category" text={category} />}
-            {location && <ProductTag type="location" text={location} />}
+            {category && (
+              <ProductTag type="category" text={category} />
+            )}
+            {location && !hideLocation && (
+              <ProductTag type="location" text={location} />
+            )}
             {duration && (
               <ProductTag type="duration" text={`${duration} min`} />
             )}

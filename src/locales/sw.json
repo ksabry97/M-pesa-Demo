@@ -2,5 +2,107 @@
   "welcome": "Habari App",
   "searchPlaceholder": "Tafuta bidhaa...",
   "search": "Tafuta",
-  "login": "Ingia"
+  "login": "Ingia",
+  "auth": {
+    "signUp": "Jisajili",
+    "signIn": "Ingia",
+    "step": "Hatua",
+    "of": "ya",
+    "next": "Inayofuata",
+    "previous": "Iliyopita",
+    "back": "Rudi",
+    "submit": "Wasilisha",
+    "cancel": "Ghairi",
+    "continue": "Endelea",
+    "businessLocation": "Mahali pa Biashara",
+    "businessInfo": "Taarifa za Biashara",
+    "personalInfo": "Taarifa Binafsi",
+    "accountDetails": "Maelezo ya Akaunti",
+    "verification": "Uthibitisho",
+    "email": "Barua pepe",
+    "emailAddress": "Anwani ya Barua pepe",
+    "password": "Nenosiri",
+    "confirmPassword": "Thibitisha Nenosiri",
+    "phoneNumber": "Nambari ya Simu",
+    "businessName": "Jina la Biashara",
+    "fullName": "Jina Kamili",
+    "address": "Anwani",
+    "city": "Jiji",
+    "country": "Nchi",
+    "postalCode": "Msimbo wa Posta",
+    "alreadyHaveAccount": "Una akaunti tayari?",
+    "dontHaveAccount": "Huna akaunti?",
+    "forgotPassword": "Umesahau Nenosiri?",
+    "registerNow": "Jisajili Sasa",
+    "signInNow": "Ingia Sasa",
+    "backToSignIn": "Rudi kwa Kuingia",
+    "createAccount": "Unda Akaunti",
+    "welcomeBack": "Karibu Tena",
+    "signInToAccount": "Ingia kwenye akaunti yako",
+    "enterDetails": "Weka maelezo yako ili kuendelea",
+    "enterDetailsToCreate": "Weka maelezo yako ili kuunda akaunti yako",
+    "rememberMe": "Nikumbuke",
+    "orLoginWith": "Au ingia kwa",
+    "loginWithEmail": "Ingia kwa Barua pepe",
+    "loginWithPhone": "Ingia kwa Nambari ya Simu",
+    "demoCredentials": "Taarifa za Jaribio:",
+    "step1": {
+      "title": "Biashara yako iko wapi?",
+      "subtitle": "Chagua nchi yako ili kuendelea",
+      "countryLabel": "Nchi",
+      "selectCountry": "Chagua nchi",
+      "agreeToTerms": "Nakubali",
+      "userAgreement": "Makubaliano ya Mtumiaji",
+      "and": "na",
+      "termsConditions": "Masharti na Hali"
+    },
+    "step2": {
+      "confirmTitle": "Thibitisha Nambari Yako ya Simu",
+      "confirmMessage": "Tutatuma msimbo wa uthibitisho kwa",
+      "confirmMessage2": "Je, nambari hii ni sahihi?"
+    },
+    "step3": {
+      "title": "Thibitisha Nambari Yako ya Simu",
+      "subtitle": "Weka msimbo wa uthibitisho uliotumwa kwa simu yako",
+      "successTitle": "Simu Imethibitishwa Kikamilifu!",
+      "successMessage": "Nambari yako ya simu imethibitishwa. Unaweza kuendelea na usajili wako."
+    },
+    "step4": {
+      "title": "Unda Nenosiri Lako",
+      "subtitle": "Chagua nenosiri imara kulinda akaunti yako",
+      "buttonLabel": "Unda Nenosiri",
+      "successTitle": "Nenosiri Limeundwa Kikamilifu!",
+      "successMessage": "Akaunti yako imewekwa. Unaweza kuanza kutumia programu sasa."
+    },
+    "passwordCreation": {
+      "weak": "Nenosiri Dhaifu",
+      "weakTitle": "Nenosiri ni dhaifu sana",
+      "weakMessage": "Jaribu kuongeza herufi zaidi, nambari, au alama maalum",
+      "medium": "Nenosiri la Kati",
+      "mediumTitle": "Nenosiri linakuwa bora",
+      "mediumMessage": "Fikiria kuongeza tofauti zaidi kulifanya liwe imara zaidi",
+      "strong": "Nenosiri Imara",
+      "strongTitle": "Vizuri! Nenosiri lako ni imara"
+    },
+    "otpVerification": {
+      "didntGetCode": "Hukupata msimbo?",
+      "invalidCredentials": "Taarifa Batili",
+      "invalidCredentialsMessage": "Msimbo ulioweka si sahihi. Tafadhali jaribu tena."
+    },
+    "labels": {
+      "confirm": "Thibitisha",
+      "editNumber": "Badilisha Nambari",
+      "continue": "Endelea",
+      "back": "Rudi",
+      "password": "Nenosiri",
+      "resend": "Tuma Tena",
+      "retry": "Jaribu Tena",
+      "done": "Imekamilika"
+    },
+    "placeholders": {
+      "enterNewPassword": "Weka nenosiri lako jipya",
+      "enterEmail": "Weka barua pepe yako",
+      "enterPassword": "Weka nenosiri"
+    }
+  }
 }

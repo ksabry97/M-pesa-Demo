@@ -334,10 +334,7 @@ export const BookingCard = ({
                 )}
             </div>
           )}
-          {booking.status !== "active" &&
-            booking.status !== "cancelled" &&
-            booking.status !== "completed" &&
-            booking.status === "ready" && (
+          {booking.status === "pending" && (
               <div className="flex flex-col sm:flex-row gap-[10px] items-stretch sm:items-center py-3 sm:py-2 px-2 sm:px-0 mt-3">
                 <button
                   onClick={(e) => {

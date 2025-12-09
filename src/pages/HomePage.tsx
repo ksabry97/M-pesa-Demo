@@ -1,20 +1,15 @@
-import { Layout } from "../components/Layout";
 import { ServiceCard } from "../components/ServiceCard";
 import { ProductCard } from "../components/ProductCard/ProductCard";
 import { BrowseCategories } from "../components/BrowseCategories";
 import { SponsorBanner } from "../components/SponsorBanner";
 import { ServicesCarousel } from "../components/ServicesCarousel";
-import { HowItWorks } from "../components/HowItWorks";
-import { FeaturedProviders } from "../components/FeaturedProviders";
-import { AdsBanner } from "../components/AdsBanner";
 import { useProductStore } from "../store/useProductStore";
 import { categories as categoriesData } from "../data/categories";
-import { getProviderById, getVerifiedProviders } from "../data/providers";
+import { getProviderById } from "../data/providers";
 import sponserImage0 from "../assets/sponser-0.svg";
 import sponserImage1 from "../assets/sponser-1.svg";
 import sponserImage2 from "../assets/sponser-2.svg";
 import sponserServiceImage from "../assets/sponser-service.svg";
-import adsImage from "../assets/services/Ads.svg";
 import {
   Sparkles,
   Wrench,
@@ -40,9 +35,6 @@ const HomePage = () => {
 
   // Get featured services - filtered from services array
   const featuredServices = services.filter((service) => service.featured);
-
-  // Get featured providers (verified providers)
-  const featuredProviders = getVerifiedProviders();
 
   const handleBookNow = (serviceId: string) => {
     console.log(`Book now clicked for service: ${serviceId}`);
@@ -134,6 +126,7 @@ const HomePage = () => {
         "https://images.unsplash.com/photo-1581578731548-c64695cc6952?w=1440&h=600&fit=crop", // Cleaning
         "https://images.unsplash.com/photo-1486262715619-67b85e0b08d3?w=1440&h=600&fit=crop", // Auto Mechanics
         "https://images.unsplash.com/photo-1586023492125-27b2c045efd7?w=1440&h=600&fit=crop", // Furniture
+        "https://images.unsplash.com/photo-1601581875305-f0a3e7c64b38?w=1440&h=600&fit=crop", // Moving
         "https://images.unsplash.com/photo-1561070791-2526d30994b5?w=1440&h=600&fit=crop", // Design
         "https://images.unsplash.com/photo-1498050108023-c5249f4df085?w=1440&h=600&fit=crop", // Programming
         "https://images.unsplash.com/photo-1621905251918-48416bd8575a?w=1440&h=600&fit=crop", // Plumbing
@@ -143,243 +136,200 @@ const HomePage = () => {
   }));
 
   return (
-    <Layout>
-      <div className="w-full bg-[#F0F1FE]">
-        {/* Grouped Container: Carousel floating above How It Works */}
-        <div className="relative">
-          {/* Services Carousel Section */}
-          <section className="relative bg-white px-4 md:px-8 pt-8 pb-10 z-20">
-            <ServicesCarousel
-              services={carouselServices}
-              onServiceClick={(index) => {
-                console.log(
-                  `Service carousel clicked: ${browseServices[index].title}`
+    <div className="w-full px-4 md:px-8 pt-8 bg-[#F0F1FE]">
+      {/* Services Carousel Section */}
+      <section className="mb-12">
+        <ServicesCarousel
+          services={carouselServices}
+          onServiceClick={(index) => {
+            console.log(
+              `Service carousel clicked: ${browseServices[index].title}`
+            );
+          }}
+          autoPlay={5000}
+        />
+      </section>
+
+      {/* Browse Services Section */}
+      <section className="mb-12">
+        <div className="flex flex-col lg:flex-row gap-6 items-stretch">
+          {/* Sponsor Banner - Left Side */}
+          <div className="hidden lg:block w-[300px] flex-shrink-0">
+            <SponsorBanner
+              image={sponserServiceImage}
+              imageAlt="Sponsor"
+              height="full"
+              onClick={() => console.log("Service sponsor banner clicked")}
+            />
+          </div>
+
+          {/* Services Grid */}
+          <div className="flex-1 flex flex-col">
+            <h2 className="text-2xl font-semibold text-text-highContrast mb-6">
+              Browse Services
+            </h2>
+            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 flex-1">
+              {browseServices.map((service, index) => (
+                <ServiceCard
+                  key={index}
+                  icon={service.icon}
+                  title={service.title}
+                  description={service.description}
+                  onClick={() => console.log(`Clicked: ${service.title}`)}
+                />
+              ))}
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Popular Services Section - Matching Figma Design */}
+      <section className="mb-12">
+        <div className="flex flex-col lg:flex-row gap-6">
+          {/* Products Grid */}
+          <div className="flex-1">
+            <div className="mb-[46px]">
+              <h2 className="text-[22px] font-semibold text-text-highContrast leading-[22px]">
+                Popular Services
+              </h2>
+            </div>
+            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
+              {featuredServices.map((service) => {
+                const provider = getProviderById(service.providerId);
+                const category = categoriesData.find(
+                  (cat) => cat.id === service.categoryId
                 );
-              }}
-              autoPlay={5000}
+
+                // Determine button text based on pricing type
+                const buttonText =
+                  service.pricingType === "package"
+                    ? "Select packages"
+                    : "Book now";
+
+                // Hide price for package-based services
+                const displayPrice =
+                  service.pricingType === "package"
+                    ? undefined
+                    : service.basePrice;
+
+                return (
+                  <ProductCard
+                    key={service.id}
+                    image={service.images?.[0] || undefined}
+                    imageAlt={service.name}
+                    category={category?.name || "Service"}
+                    location={provider?.location || "Kenya"}
+                    duration={service.duration || 60}
+                    isFavorite={isFavorite(service.id)}
+                    onFavoriteToggle={() => toggleFavorite(service.id)}
+                    merchantLogo={provider?.logo || undefined}
+                    rating={service.rating}
+                    reviewCount={service.reviewCount}
+                    title={service.name}
+                    description={
+                      service.shortDescription || service.description
+                    }
+                    isVerified={service.verified || false}
+                    price={displayPrice}
+                    currency={service.currency}
+                    buttonText={buttonText}
+                    onBookNow={() => handleBookNow(service.id)}
+                    onClick={() =>
+                      console.log(`Product clicked: ${service.name}`)
+                    }
+                  />
+                );
+              })}
+            </div>
+          </div>
+
+          {/* Sponsor Banners - Right Side */}
+          <div className="hidden lg:flex flex-col w-[250px] flex-shrink-0 gap-2">
+            {/* Top Sponsor Banner */}
+            <SponsorBanner
+              image={sponserImage0}
+              imageAlt="Sponsor"
+              height={266}
+              onClick={() => console.log("Sponsor banner 0 clicked")}
             />
-          </section>
-
-          {/* How It Works Section */}
-          <section className="relative z-10">
-            <HowItWorks />
-          </section>
-        </div>
-
-        {/* Featured Providers Section */}
-        <section>
-          <FeaturedProviders
-            providers={featuredProviders}
-            onProviderClick={(providerId) => {
-              console.log(`Provider clicked: ${providerId}`);
-              // TODO: Navigate to provider page
-            }}
-          />
-        </section>
-
-        {/* Rest of content with padding */}
-        <div className="px-4 md:px-8">
-          {/* Browse Services Section */}
-          <section className="mb-12">
-            <div className="flex flex-col lg:flex-row gap-6 items-stretch">
-              {/* Sponsor Banner - Left Side */}
-              <div className="hidden lg:block w-[300px] flex-shrink-0">
-                <SponsorBanner
-                  image={sponserServiceImage}
-                  imageAlt="Sponsor"
-                  height="full"
-                  onClick={() => console.log("Service sponsor banner clicked")}
-                />
-              </div>
-
-              {/* Services Grid */}
-              <div className="flex-1 flex flex-col">
-                <h2 className="text-2xl font-semibold text-text-highContrast mb-6">
-                  Browse Services
-                </h2>
-                <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 flex-1">
-                  {browseServices.map((service, index) => (
-                    <ServiceCard
-                      key={index}
-                      icon={service.icon}
-                      title={service.title}
-                      description={service.description}
-                      onClick={() => console.log(`Clicked: ${service.title}`)}
-                    />
-                  ))}
-                </div>
-              </div>
-            </div>
-          </section>
-
-          {/* Ads Banner Section - After Browse Services */}
-          <AdsBanner
-            image={adsImage}
-            imageAlt="Advertisement"
-            onClick={() => console.log("Ads banner clicked")}
-          />
-
-          {/* Popular Services Section - Matching Figma Design */}
-          <section className="mb-12">
-            <div className="flex flex-col lg:flex-row gap-6">
-              {/* Products Grid */}
-              <div className="flex-1">
-                <div className="mb-[46px]">
-                  <h2 className="text-[22px] font-semibold text-text-highContrast leading-[22px]">
-                    Popular Services
-                  </h2>
-                </div>
-                <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
-                  {featuredServices.map((service) => {
-                    const provider = getProviderById(service.providerId);
-                    const category = categoriesData.find(
-                      (cat) => cat.id === service.categoryId
-                    );
-
-                    // Determine button text based on pricing type
-                    const buttonText =
-                      service.pricingType === "package"
-                        ? "Select packages"
-                        : "Book now";
-
-                    // Hide price for package-based services
-                    const displayPrice =
-                      service.pricingType === "package"
-                        ? undefined
-                        : service.basePrice;
-
-                    return (
-                      <ProductCard
-                        key={service.id}
-                        image={service.images?.[0] || undefined}
-                        imageAlt={service.name}
-                        category={category?.name || "Service"}
-                        location={provider?.location || "Kenya"}
-                        duration={service.duration || 60}
-                        isFavorite={isFavorite(service.id)}
-                        onFavoriteToggle={() => toggleFavorite(service.id)}
-                        merchantLogo={provider?.logo || undefined}
-                        rating={service.rating}
-                        reviewCount={service.reviewCount}
-                        title={service.name}
-                        description={
-                          service.shortDescription || service.description
-                        }
-                        isVerified={service.verified || false}
-                        price={displayPrice}
-                        currency={service.currency}
-                        buttonText={buttonText}
-                        onBookNow={() => handleBookNow(service.id)}
-                        onClick={() =>
-                          console.log(`Product clicked: ${service.name}`)
-                        }
-                      />
-                    );
-                  })}
-                </div>
-              </div>
-
-              {/* Sponsor Banners - Right Side */}
-              <div className="hidden lg:flex flex-col w-[250px] flex-shrink-0 gap-2">
-                {/* Top Sponsor Banner */}
-                <SponsorBanner
-                  image={sponserImage0}
-                  imageAlt="Sponsor"
-                  height={266}
-                  onClick={() => console.log("Sponsor banner 0 clicked")}
-                />
-                {/* Bottom Sponsor Banner */}
-                <SponsorBanner
-                  image={sponserImage1}
-                  imageAlt="Sponsor"
-                  height={660}
-                  onClick={() => console.log("Sponsor banner 1 clicked")}
-                />
-              </div>
-            </div>
-          </section>
-
-          {/* Browse Categories Section - Matching Figma Design */}
-          <section className="mb-12">
-            <BrowseCategories
-              categories={displayCategories}
-              onCategoryClick={handleCategoryClick}
+            {/* Bottom Sponsor Banner */}
+            <SponsorBanner
+              image={sponserImage1}
+              imageAlt="Sponsor"
+              height={660}
+              onClick={() => console.log("Sponsor banner 1 clicked")}
             />
-          </section>
-
-          {/* Popular Services Section (Second) - After Browse Categories */}
-          <section className="mb-12">
-            <div className="flex flex-col lg:flex-row gap-6">
-              {/* Sponsor Banner - Left Side */}
-              <div className="hidden lg:block w-[250px] flex-shrink-0">
-                <SponsorBanner
-                  image={sponserImage2}
-                  imageAlt="Sponsor"
-                  onClick={() => console.log("Sponsor banner clicked")}
-                />
-              </div>
-
-              {/* Products Grid - Show all services */}
-              <div className="flex-1">
-                <div className="mb-[46px]">
-                  <h2 className="text-[22px] font-semibold text-text-highContrast leading-[22px]">
-                    Popular Services
-                  </h2>
-                </div>
-                <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
-                  {services.map((service) => {
-                    const provider = getProviderById(service.providerId);
-                    const category = categoriesData.find(
-                      (cat) => cat.id === service.categoryId
-                    );
-
-                    // Determine button text based on pricing type
-                    const buttonText =
-                      service.pricingType === "package"
-                        ? "Select packages"
-                        : "Book now";
-
-                    // Hide price for package-based services
-                    const displayPrice =
-                      service.pricingType === "package"
-                        ? undefined
-                        : service.basePrice;
-
-                    return (
-                      <ProductCard
-                        key={`second-${service.id}`}
-                        image={service.images?.[0] || undefined}
-                        imageAlt={service.name}
-                        category={category?.name || "Service"}
-                        location={provider?.location || "Kenya"}
-                        duration={service.duration || 60}
-                        isFavorite={isFavorite(service.id)}
-                        onFavoriteToggle={() => toggleFavorite(service.id)}
-                        merchantLogo={provider?.logo || undefined}
-                        rating={service.rating}
-                        reviewCount={service.reviewCount}
-                        title={service.name}
-                        description={
-                          service.shortDescription || service.description
-                        }
-                        isVerified={service.verified || false}
-                        price={displayPrice}
-                        currency={service.currency}
-                        buttonText={buttonText}
-                        onBookNow={() => handleBookNow(service.id)}
-                        onClick={() =>
-                          console.log(`Product clicked: ${service.name}`)
-                        }
-                      />
-                    );
-                  })}
-                </div>
-              </div>
-            </div>
-          </section>
+          </div>
         </div>
-      </div>
-    </Layout>
+      </section>
+
+      {/* Browse Categories Section - Matching Figma Design */}
+      <section className="mb-12">
+        <BrowseCategories
+          categories={displayCategories}
+          onCategoryClick={handleCategoryClick}
+        />
+      </section>
+
+      {/* Popular Services Section (Second) - After Browse Categories */}
+      <section className="mb-12">
+        <div className="flex flex-col lg:flex-row gap-6">
+          {/* Sponsor Banner - Left Side */}
+          <div className="hidden lg:block w-[250px] flex-shrink-0">
+            <SponsorBanner
+              image={sponserImage2}
+              imageAlt="Sponsor"
+              onClick={() => console.log("Sponsor banner clicked")}
+            />
+          </div>
+
+          {/* Products Grid - Show all services */}
+          <div className="flex-1">
+            <div className="mb-[46px]">
+              <h2 className="text-[22px] font-semibold text-text-highContrast leading-[22px]">
+                Popular Services
+              </h2>
+            </div>
+            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
+              {services.map((service) => {
+                const provider = getProviderById(service.providerId);
+                const category = categoriesData.find(
+                  (cat) => cat.id === service.categoryId
+                );
+
+                return (
+                  <ProductCard
+                    key={`second-${service.id}`}
+                    image={service.images?.[0] || undefined}
+                    imageAlt={service.name}
+                    category={category?.name || "Service"}
+                    location={provider?.location || "Kenya"}
+                    duration={service.duration || 60}
+                    isFavorite={isFavorite(service.id)}
+                    onFavoriteToggle={() => toggleFavorite(service.id)}
+                    merchantLogo={provider?.logo || undefined}
+                    rating={service.rating}
+                    reviewCount={service.reviewCount}
+                    title={service.name}
+                    description={
+                      service.shortDescription || service.description
+                    }
+                    isVerified={service.verified || false}
+                    price={service.basePrice}
+                    currency={service.currency}
+                    onBookNow={() => handleBookNow(service.id)}
+                    onClick={() =>
+                      console.log(`Product clicked: ${service.name}`)
+                    }
+                    hideLocation={false}
+                  />
+                );
+              })}
+            </div>
+          </div>
+        </div>
+      </section>
+    </div>
   );
 };
 

@@ -2,5 +2,107 @@
   "welcome": "Hello App",
   "searchPlaceholder": "Search products...",
   "search": "Search",
-  "login": "Login"
+  "login": "Login",
+  "auth": {
+    "signUp": "Sign Up",
+    "signIn": "Sign In",
+    "step": "Step",
+    "of": "of",
+    "next": "Next",
+    "previous": "Previous",
+    "back": "Back",
+    "submit": "Submit",
+    "cancel": "Cancel",
+    "continue": "Continue",
+    "businessLocation": "Business Location",
+    "businessInfo": "Business Information",
+    "personalInfo": "Personal Information",
+    "accountDetails": "Account Details",
+    "verification": "Verification",
+    "email": "Email",
+    "emailAddress": "Email Address",
+    "password": "Password",
+    "confirmPassword": "Confirm Password",
+    "phoneNumber": "Phone Number",
+    "businessName": "Business Name",
+    "fullName": "Full Name",
+    "address": "Address",
+    "city": "City",
+    "country": "Country",
+    "postalCode": "Postal Code",
+    "alreadyHaveAccount": "Already have an account?",
+    "dontHaveAccount": "Don't have an account?",
+    "forgotPassword": "Forgot Password?",
+    "registerNow": "Register Now",
+    "signInNow": "Sign In Now",
+    "backToSignIn": "Back to Sign In",
+    "createAccount": "Create Account",
+    "welcomeBack": "Welcome Back",
+    "signInToAccount": "Sign in to your account",
+    "enterDetails": "Enter your details to continue",
+    "enterDetailsToCreate": "Enter your details to create your account",
+    "rememberMe": "Remember me",
+    "orLoginWith": "Or login with",
+    "loginWithEmail": "Login with Email",
+    "loginWithPhone": "Login with Phone Number",
+    "demoCredentials": "Demo Credentials:",
+    "step1": {
+      "title": "Where is your business located?",
+      "subtitle": "Select your country to continue",
+      "countryLabel": "Country",
+      "selectCountry": "Select a country",
+      "agreeToTerms": "I agree to the",
+      "userAgreement": "User Agreement",
+      "and": "and",
+      "termsConditions": "Terms & Conditions"
+    },
+    "step2": {
+      "confirmTitle": "Confirm Your Phone Number",
+      "confirmMessage": "We will send a verification code to",
+      "confirmMessage2": "Is this number correct?"
+    },
+    "step3": {
+      "title": "Verify Your Phone Number",
+      "subtitle": "Enter the verification code sent to your phone",
+      "successTitle": "Phone Verified Successfully!",
+      "successMessage": "Your phone number has been verified. You can now continue with your registration."
+    },
+    "step4": {
+      "title": "Create Your Password",
+      "subtitle": "Choose a strong password to secure your account",
+      "buttonLabel": "Create Password",
+      "successTitle": "Password Created Successfully!",
+      "successMessage": "Your account has been set up. You can now start using the app."
+    },
+    "passwordCreation": {
+      "weak": "Weak Password",
+      "weakTitle": "Password is too weak",
+      "weakMessage": "Try adding more characters, numbers, or special symbols",
+      "medium": "Medium Password",
+      "mediumTitle": "Password is getting better",
+      "mediumMessage": "Consider adding more variety to make it stronger",
+      "strong": "Strong Password",
+      "strongTitle": "Great! Your password is strong"
+    },
+    "otpVerification": {
+      "didntGetCode": "Didn't get the code?",
+      "invalidCredentials": "Invalid Credentials",
+      "invalidCredentialsMessage": "The code you entered is incorrect. Please try again."
+    },
+    "labels": {
+      "confirm": "Confirm",
+      "editNumber": "Edit Number",
+      "continue": "Continue",
+      "back": "Back",
+      "password": "Password",
+      "resend": "Resend",
+      "retry": "Try Again",
+      "done": "Done"
+    },
+    "placeholders": {
+      "enterNewPassword": "Enter your new password",
+      "enterEmail": "Enter your email",
+      "enterPassword": "Enter password"
+    }
+  }
 }

@@ -2,6 +2,7 @@ import { Search, ChevronDown, Globe, Heart } from "lucide-react";
 import { useState, useEffect, useRef } from "react";
 import { useTranslation } from "react-i18next";
 import Logo from "../../assets/Logo.png";
+import { Navigate, useNavigate } from "react-router-dom";
 
 const HeaderMain = () => {
   const { i18n } = useTranslation();
@@ -48,6 +49,8 @@ const HeaderMain = () => {
     "Plumbing & Electrical",
     "Home Maintenance",
   ];
+
+  const navigate = useNavigate();
 
   useEffect(() => {
     localStorage.setItem("selectedCountry", selectedCountry);
@@ -269,7 +272,9 @@ const HeaderMain = () => {
             </button>
 
             {/* Join Button */}
-            <button className="flex items-center justify-center h-[36px] sm:h-[40px] md:h-[48px] px-3 sm:px-4 md:px-6 bg-button-fill-bg text-button-fill-fg rounded-[12px] hover:opacity-90 transition-opacity">
+            <button 
+            onClick={() => navigate('/auth/login')}
+            className="flex items-center justify-center h-[36px] sm:h-[40px] md:h-[48px] px-3 sm:px-4 md:px-6 bg-button-fill-bg text-button-fill-fg rounded-[12px] hover:opacity-90 transition-opacity">
               <span className="text-[12px] sm:text-[13px] md:text-[14px] leading-[20px] font-poppins font-medium">
                 Join
               </span>
