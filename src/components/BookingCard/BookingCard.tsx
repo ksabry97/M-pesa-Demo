@@ -35,11 +35,11 @@ export interface BookingCardProps {
 
 /**
  * BookingCard Component
- * 
+ *
  * Displays booking information in a horizontal card format matching Figma design.
  * Layout: Image on left (260px x 272px), Content on right (416px width).
  * Card dimensions: 676px width × 272px height (exact Figma specs).
- * 
+ *
  * @example
  * ```tsx
  * <BookingCard
@@ -176,12 +176,7 @@ export const BookingCard = ({
 
           {/* Tags - Category and Duration */}
           <div className="flex gap-2 items-center py-2">
-            {category && (
-              <ProductTag 
-                type="category" 
-                text={category.name}
-              />
-            )}
+            {category && <ProductTag type="category" text={category.name} />}
             {durationMinutes > 0 && (
               <ProductTag
                 type="duration"
@@ -200,7 +195,9 @@ export const BookingCard = ({
 
           {/* Service Description */}
           <p className="text-label-2 font-regular text-text-primary line-clamp-2 lg:line-clamp-1 py-1">
-            {service?.description || service?.shortDescription || "Service description"}
+            {service?.description ||
+              service?.shortDescription ||
+              "Service description"}
           </p>
 
           {/* Price */}
@@ -235,7 +232,11 @@ export const BookingCard = ({
                 {statusConfig.label}
               </span>
             </div>
-            <p className={`text-label-3 font-medium ${statusConfig.textColor || "text-accent"}`}>
+            <p
+              className={`text-label-3 font-medium ${
+                statusConfig.textColor || "text-accent"
+              }`}
+            >
               {statusConfig.text}
             </p>
           </div>
@@ -271,7 +272,7 @@ export const BookingCard = ({
               </button>
             </div>
           )}
-          {booking.status !== "active" && booking.status !== "cancelled" && booking.status !== "completed" && (
+          {booking.status === "ready" && (
             <div className="flex flex-col sm:flex-row gap-[10px] items-stretch sm:items-center py-3 sm:py-2 px-2 sm:px-0 mt-3">
               <button
                 onClick={(e) => {
@@ -297,15 +298,17 @@ export const BookingCard = ({
                   hover:opacity-90
                 "
               >
-                View Details
+                Start Now
               </button>
-              {(showCancelButton && (booking.status === "pending" || booking.status === "ready")) && (
-                <button
-                  onClick={(e) => {
-                    e.stopPropagation();
-                    onCancel?.(booking.id);
-                  }}
-                  className="
+              {showCancelButton &&
+                (booking.status === "pending" ||
+                  booking.status === "ready") && (
+                  <button
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      onCancel?.(booking.id);
+                    }}
+                    className="
                     flex-1
                     min-h-[44px]
                     sm:h-10
@@ -325,12 +328,77 @@ export const BookingCard = ({
                     transition-colors
                     hover:bg-red-50
                   "
-                >
-                  Cancel Now
-                </button>
-              )}
+                  >
+                    Cancel Now
+                  </button>
+                )}
             </div>
           )}
+          {booking.status !== "active" &&
+            booking.status !== "cancelled" &&
+            booking.status !== "completed" &&
+            booking.status === "ready" && (
+              <div className="flex flex-col sm:flex-row gap-[10px] items-stretch sm:items-center py-3 sm:py-2 px-2 sm:px-0 mt-3">
+                <button
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    onClick?.();
+                  }}
+                  className="
+                  flex-1
+                  min-h-[44px]
+                  sm:h-10
+                  py-3
+                  sm:py-2
+                  px-4
+                  bg-button-fill-bg
+                  text-button-fill-fg
+                  rounded-xl
+                  flex
+                  items-center
+                  justify-center
+                  text-body-3
+                  font-medium
+                  transition-colors
+                  hover:opacity-90
+                "
+                >
+                  View Details
+                </button>
+                {showCancelButton &&
+                  (booking.status === "pending" ||
+                    booking.status === "ready") && (
+                    <button
+                      onClick={(e) => {
+                        e.stopPropagation();
+                        onCancel?.(booking.id);
+                      }}
+                      className="
+                    flex-1
+                    min-h-[44px]
+                    sm:h-10
+                    py-3
+                    sm:py-2
+                    px-4
+                    border
+                    border-[#e5484d]
+                    text-[#e5484d]
+                    bg-transparent
+                    rounded-xl
+                    flex
+                    items-center
+                    justify-center
+                    text-body-3
+                    font-medium
+                    transition-colors
+                    hover:bg-red-50
+                  "
+                    >
+                      Cancel Now
+                    </button>
+                  )}
+              </div>
+            )}
         </div>
       </div>
     </div>

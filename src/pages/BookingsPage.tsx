@@ -122,7 +122,12 @@ const BookingsPage = () => {
             {/* Section Title */}
             <div className="mb-6">
               <h2 className="text-h5 font-semibold text-text-highContrast">
-                <span>{statusTabs.find((tab) => tab.value === selectedStatus)?.label} </span>
+                <span>
+                  {
+                    statusTabs.find((tab) => tab.value === selectedStatus)
+                      ?.label
+                  }{" "}
+                </span>
                 <span className="text-[20px] font-medium text-text-primary leading-6">
                   ({filteredBookings.length} Service
                   {filteredBookings.length !== 1 ? "s" : ""})
