@@ -1,4 +1,4 @@
-import { ReactNode } from "react";
+import type { ReactNode } from "react";
 import { MapPin, Clock } from "lucide-react";
 
 export type ProductTagType = "category" | "location" | "duration";
