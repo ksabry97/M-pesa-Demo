@@ -1,5 +1,4 @@
 import { useState } from "react";
-import { Layout } from "../components/Layout";
 import { ServiceCard } from "../components/ServiceCard";
 import { ProductCard } from "../components/ProductCard/ProductCard";
 import { BrowseCategories } from "../components/BrowseCategories";
@@ -286,7 +285,7 @@ const HomePage = () => {
   }));
 
   return (
-    <Layout>
+  
       <div className="w-full px-4 md:px-8 pt-8">
         {/* Services Carousel Section */}
         <section className="mb-12">
@@ -451,7 +450,7 @@ const HomePage = () => {
           </div>
         </section>
       </div>
-    </Layout>
+    
   );
 };
 

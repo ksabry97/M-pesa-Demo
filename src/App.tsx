@@ -1,8 +1,32 @@
 import './App.css'
 import { HomePage } from './pages';
+import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
+import MerchantProfile from '../src/pages/MerchantProfile';
+
+import Layout from "../src/components/Layout/Layout"
+import { AuthLayout } from './pages/authLayout';
+import  SignInPage  from '../src/components/auth/pages/SignInPage';
+import { SignUpPage } from '../src/components/auth/pages/SignUpPage';
 
 function App() {
-  return <HomePage />;
+  return (
+    <BrowserRouter>
+      <Routes>
+        <Route element={<Layout />}>
+          {/* Pages inside layout */}
+          <Route path="/" element={<HomePage />} />
+          <Route path="/merchantProfile" element={<MerchantProfile />} />
+          {/* auth routes */}
+          <Route path="/auth" element={<AuthLayout />}>
+            <Route index element={<Navigate to="/auth/login" replace />} />
+            <Route path="login" element={<SignInPage />} />
+            <Route path="register" element={<SignUpPage />} />
+            {/* <Route path="forgot-password" element={<ForgotPassword />} /> */}
+          </Route>
+        </Route>
+      </Routes>
+    </BrowserRouter>
+  );
 }
 
-export default App
+export default App;

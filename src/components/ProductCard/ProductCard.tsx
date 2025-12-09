@@ -13,6 +13,7 @@ export interface ProductCardProps {
    * Alt text for the image
    */
   imageAlt?: string;
+  hideLocation?: boolean;
   
   /**
    * Category tag text (e.g., "Food & Beverages")
@@ -136,6 +137,7 @@ export const ProductCard = ({
   currency = "AED",
   onBookNow,
   onClick,
+  hideLocation,
   className = "",
 }: ProductCardProps) => {
   // Format price: split integer and decimal parts
@@ -195,7 +197,7 @@ export const ProductCard = ({
             {category && (
               <ProductTag type="category" text={category} />
             )}
-            {location && (
+            {location && !hideLocation && (
               <ProductTag type="location" text={location} />
             )}
             {duration && (
